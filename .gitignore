@@ -1,0 +1,10 @@
+.DS_Store
+a.out
+*.dylib
+*.a
+*.o
+cub3d
+*.swiftdoc
+*.swiftmodule
+*.swiftsourceinfo
+a.out.DSYM~
