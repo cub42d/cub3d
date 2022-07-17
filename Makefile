@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/14 14:32:24 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/17 15:18:40 by hyunkkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,10 @@ LIBMLX				:=	libmlx.dylib
 #	header
 INCLUDE				:=	./include/
 INCLUDE_FILES		:=	$(addsuffix .h, $(addprefix $(INCLUDE), \
-						))
+						ray_casting))
 #	srcs
 SRCS				:=	$(addsuffix .c, \
-						)
+						main)
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
@@ -56,7 +56,7 @@ $(LIBMLX)			:
 
 .PHONY				:	clean
 clean				:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS)
 
 .PHONY				:	fclean
 fclean				:
