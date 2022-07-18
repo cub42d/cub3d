@@ -166,7 +166,7 @@ double	cast_single_ray(int x, double px, double py, double theta, dir_t *dir)
 	return (wall_dist);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y_start, int y_end, int color)
+void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
 {
 	char	*dst;
 	int		start_point;
@@ -174,7 +174,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y_start, int y_end, int color)
 	start_point = y_start;
 	while (start_point < y_end)
 	{
-		dst = data->addr + (start_point * data->line_len + x * (data->bits_per_pixel / 8));
+		dst = vu->addr + (start_point * vu->line_len + x * (vu->bpp / 8));
 		*(unsigned int *)dst = color;
 		start_point++;
 	}
@@ -188,7 +188,7 @@ int	get_wall_height(double dist)
 	return ((int)(SY * (WALL_H / fov_h)));
 }
 
-void	draw_wall(t_data *data, double wall_dist, int x, int color)
+void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 {
 	int	wall_height;
 	int	y0;
@@ -201,59 +201,123 @@ void	draw_wall(t_data *data, double wall_dist, int x, int color)
 	y1 = y0 + wall_height - 1;
 	y_start = max(0, y0);
 	y_end = min(SY - 1, y1);
-	my_mlx_pixel_put(data, x, y_start, y_end, color);
+	my_mlx_pixel_put(vu, x, y_start, y_end, color);
 }
 
-// void	render(void *mlx, void *mlx_win, t_data *data, coord_t *player_coord)
-// {
-// 	static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
-// 	int		x;			/* ? */
-
-// 	mlx_clear_window(mlx, mlx_win);
-// 	x = 0;
-// 	while (x < SX)
-// 	{
-// 		wall_dist = cast_single_ray(x, px, py, theta, &wall_dir);
-// 		draw_wall(&img, wall_dist, x, 0X75B9A0);
-// 		x++;
-// 	}
-// }
-
-int	main(int argc, char **argv)
+void	render(t_view *vu)
 {
-	double	px;			/* player x */
-	double	py;			/* player y */
-	double	theta;		/* angle of fov */
-	double	wall_dist;	/* wall distance from player */
-	dir_t	wall_dir;
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-
-	px = atof(argv[1]);
-	py = atof(argv[2]);
-	theta = deg2rad(atof(argv[3]));
-	if (argc != 4)
-		return (print_err("argument error"));
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, SX, SY, "ex03 :The Height");
-	img.img = mlx_new_image(mlx, SX, SY);
-	img.addr = mlx_get_data_addr\
-	(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
+	static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
 	int		x;			/* ? */
 
-	mlx_clear_window(mlx, mlx_win);
+	x = 0;
+	while (x < SX)
+		my_mlx_pixel_put(vu, x++, 0, SY - 1, 0X000000);
 	x = 0;
 	while (x < SX)
 	{
-		wall_dist = cast_single_ray(x, px, py, theta, &wall_dir);
-		draw_wall(&img, wall_dist, x, 0X75B9A0);
+		vu->wall_dist = cast_single_ray(x, vu->px, vu->py, vu->theta, &(vu->wall_dir));
+		draw_wall(vu, vu->wall_dist, x, wall_colors[vu->wall_dir]);
 		x++;
 	}
-	/*
-	*	mlx_hook(mlx_win, key_code, 0, event_func, void *param);
-	*/
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(vu->mlx, vu->mlx_win, vu->img, 0, 0);
+}
+
+int	get_move_offset\
+(double theta, int keycode, double amt, double *delta_x, double *delta_y)
+{
+	if (keycode == W)
+	{
+		*delta_x = 1 * amt * cos(theta);
+		*delta_y = 1 * amt * sin(theta);
+	}
+	else if (keycode == A)
+	{
+		*delta_x = amt * cos(theta + (1 * M_PI_2));
+		*delta_y = amt * sin(theta + (1 * M_PI_2));
+	}
+	else if (keycode == S)
+	{
+		*delta_x = -1 * amt * cos(theta);
+		*delta_y = -1 * amt * sin(theta);
+	}
+	else if (keycode == D)
+	{
+		*delta_x = amt * cos(theta + (-1 * M_PI_2));
+		*delta_y = amt * sin(theta + (-1 * M_PI_2));
+	}
+	else
+		return (1);
+	return (0);
+}
+
+int	move_player(t_view *vu, int keycode, double amt)
+{
+	double	delta_x;
+	double	delta_y;
+	double	new_x;
+	double	new_y;
+
+	if (get_move_offset(vu->theta, keycode, amt, &delta_x, &delta_y))
+		return (print_err("invalid key press"));
+	new_x = vu->px + delta_x;
+	new_y = vu->py + delta_y;
+	if (map_get_cell((int)new_x, (int)new_y) != 0)
+		return (print_err("bump"));
+	vu->px = new_x;
+	vu->py = new_y;
+	render(vu);
+	return (0);
+}
+
+void	rotate_player(t_view *vu, double delta)
+{
+	vu->theta += delta;
+	if (vu->theta < 0)
+		vu->theta += _2PI;
+	else if (vu->theta > _2PI)
+		vu->theta -= _2PI;
+	render(vu);
+}
+
+int	key_down_event(int keycode, t_view *vu)
+{
+	if (keycode == W || keycode == A || keycode == S || keycode == D)
+	{
+		// move player coord;
+		move_player(vu, keycode, MOVE_UNIT);
+	}
+	else if (keycode == LEFT || keycode == RIGHT)
+	{
+		// rotate player's view;
+		if (keycode == LEFT)
+			rotate_player(vu, ROT_UNIT * 1);
+		else
+			rotate_player(vu, ROT_UNIT * (-1));
+	}
+	else if (keycode == ESC)
+	{
+		printf("Exit\n");
+		exit(0);
+	}
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_view	vu;
+
+	if (argc != 4)
+		return (print_err("argument error"));
+	vu.px = atof(argv[1]);
+	vu.py = atof(argv[2]);
+	vu.theta = deg2rad(atof(argv[3]));
+	vu.mlx = mlx_init();
+	vu.mlx_win = mlx_new_window(vu.mlx, SX, SY, "ray_casting tuto");
+	vu.img = mlx_new_image(vu.mlx, SX, SY);
+	vu.addr = mlx_get_data_addr(vu.img, &vu.bpp, &vu.line_len, &vu.endian);
+	render(&vu);
+	// move and draw;
+	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);
+	mlx_loop(vu.mlx);
 	return (0);
 }

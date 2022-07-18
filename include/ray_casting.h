@@ -5,16 +5,26 @@
 # include <stdlib.h>
 # include <math.h>
 # include <mlx.h>
+# include <unistd.h>
 
-typedef struct s_data
+
+typedef enum { DIR_N = 0, DIR_E, DIR_W, DIR_S } dir_t;
+
+typedef struct s_view
 {
+	void	*mlx;
+	void	*mlx_win;
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_len;
 	int		endian;
-}	t_data;
-
+	double	px;
+	double	py;
+	double	theta;
+	double	wall_dist;
+	dir_t	wall_dir;
+}	t_view;
 
 # define	EPS	(1e-06)
 # define	is_zero(d)	(fabs(d) < EPS)
@@ -30,29 +40,17 @@ typedef struct s_data
 # define	FOV_V	(FOV_H * ((double)SY / (double)SX))
 # define	WALL_H	1.0
 
-// # define	_2PI	6.28318530717958647692
-// # define	ROT_UNIT	0.03
-// # define	MOVE_UNIT	0.1
+# define	_2PI	6.28318530717958647692
+# define	ROT_UNIT	0.03
+# define	MOVE_UNIT	0.1
 
-// # define W		13
-// # define S		1
-// # define A		2
-// # define D		0
-// # define ESC	53
-// # define LEFT	123
-// # define RIGHT	124
-
-// typedef struct
-// {
-// 	double	x;
-// 	double	y;
-// 	double	theta;
-// }	coord_t;
-
-// typedef struct s_info
-// {
-
-// }	t_info;
+# define W		13
+# define S		1
+# define A		0
+# define D		2
+# define ESC	53
+# define LEFT	123
+# define RIGHT	124
 
 
 static const double	ANGLE_PER_PIXEL = FOV_H / (SX-1.);
@@ -63,7 +61,6 @@ enum { VERT, HORIZ };
 # define FALSE	0
 # define TRUE	1
 
-typedef enum { DIR_N = 0, DIR_E, DIR_W, DIR_S } dir_t;
 
 # define MAPX 6
 # define MAPY 5
