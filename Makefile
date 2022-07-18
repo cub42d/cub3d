@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/17 15:18:40 by hyunkkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/18 20:42:18 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ VPATH				:=	$(shell ls -R)
 
 CC					:=	cc
 CFLAGS				:=	-Wall -Wextra -Werror
-RM					:=	rm -f
+RM					:=	rm -rf
 
 #	mlx
 LIBMLX_DIR			:=	mlx
@@ -39,16 +39,13 @@ all					:	$(LIBMLX) $(NAME)
 $(NAME)				:	$(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
 
-$(OBJ_DIR)			:
-	@if [ ! -d $(OBJ_DIR) ]; then \
-		mkdir -p $(OBJ_DIR); \
+$(OBJS_DIR)			:
+	@if [ ! -d $(OBJS_DIR) ]; then \
+		mkdir -p $(OBJS_DIR); \
 	fi
 
 $(OBJS_DIR)%.o		:	%.c
 	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
-
-$(LIBFT)			:
-	make -C $(LIBFT_DIR) all
 
 $(LIBMLX)			:
 	make -C $(LIBMLX_DIR) all
@@ -56,7 +53,7 @@ $(LIBMLX)			:
 
 .PHONY				:	clean
 clean				:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 .PHONY				:	fclean
 fclean				:
