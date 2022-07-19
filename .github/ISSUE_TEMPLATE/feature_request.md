@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## 제목을 입력해주세요
+## Description
 
 > 설명을 적어주세요
 
