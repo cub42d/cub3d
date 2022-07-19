@@ -13,6 +13,6 @@ assignees: ''
 
 ## Progress
 
--[] todo1
--[] todo2
--[] todo3
+- [ ] todo1
+- [ ] todo2
+- [ ] todo3
