@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/20 22:41:18 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/21 03:21:15 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 
 void	*ft_calloc(size_t count, size_t size);
 void	ft_close(int fd);
+void	ft_error_exit(char *s);
 void	ft_free(void **ptr);
 void	*ft_malloc(size_t size);
 int		ft_open(const char *file, int flags);
 void	ft_perror(const char *s, int errno);
 void	ft_perror_exit(const char *s, unsigned int exit_status);
+void	ft_putendl_fd(const char *s, int fd);
 void	ft_putstr_fd(const char *s, int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);

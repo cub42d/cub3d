@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 03:21:27 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/21 03:18:41 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/21 03:20:43 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "utils.h"
+#include <unistd.h>
 
-
-#endif
+void	ft_putendl_fd(const char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
+}

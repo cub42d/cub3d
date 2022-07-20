@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:30:39 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/20 22:42:19 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/21 03:21:20 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef CUB3D_H
+# define CUB3D_h
 
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-		ft_perror_exit("argument error", 1);
-	return (0);
-}
+# define ARG_ERROR "Error: Invalid argument"
+
+#endif
