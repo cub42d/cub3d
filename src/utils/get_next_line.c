@@ -6,26 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:20:56 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/20 21:58:30 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/21 03:46:49 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-static char	*ft_strchr(const char *s, int c)
-{
-	while (*s != '\0')
-	{
-		if (*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
 
 static int	read_buff(int fd, char **save)
 {

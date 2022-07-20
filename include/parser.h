@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 20:26:15 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 03:47:57 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/21 04:25:57 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include <string.h>
-#include <unistd.h>
+#ifndef MAP_H
+# define MAP_H
 
-void	ft_perror(const char *s, int errno)
+typedef struct s_map		t_map;
+
+struct s_map
 {
-	if (s)
-	{
-		ft_putstr_fd(s, STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-	}
-	ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int		f;
+	int		c;
+	char	**arr;
+	int		width;
+	int		height;
+};
+
+void	parse_main(t_map *map, char *argv);
+
+#endif

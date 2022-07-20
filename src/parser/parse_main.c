@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 20:26:15 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 03:47:57 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/21 03:50:59 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/21 04:32:59 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "utils.h"
-#include <string.h>
-#include <unistd.h>
 
-void	ft_perror(const char *s, int errno)
+void	parse_main(t_map *map, char *argv)
 {
-	if (s)
-	{
-		ft_putstr_fd(s, STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-	}
-	ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	int	file;
+
+	if ((!ft_iseq(argv + ft_strlen(argv) - 4, ".cub")) || ft_strlen(argv) < 5)
+		ft_error_exit(FILE_ERROR);
+	file = ft_open(argv, 0x0000);
+	parse_texture(map, file);
 }

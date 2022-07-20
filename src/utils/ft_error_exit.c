@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:20:20 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 03:21:02 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/21 03:46:22 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include <stdlib.h>
 
 void	ft_error_exit(char *s)
 {
