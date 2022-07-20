@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/20 22:29:23 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/20 22:41:01 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS				:=	ft_calloc.c \
 						ft_close.c ft_free.c ft_malloc.c \
 						ft_memset.c ft_open.c ft_perror_exit.c \
 						ft_perror.c ft_putstr_fd.c ft_strchr.c \
-						ft_strlen.c ft_strutil.c get_next_line.c
+						ft_strlen.c ft_strutil.c ft_strcmp.c \
+						get_next_line.c
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

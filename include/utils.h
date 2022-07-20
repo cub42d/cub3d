@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/20 22:21:49 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/20 22:41:18 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft_strlen(const char *s);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
