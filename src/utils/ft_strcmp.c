@@ -6,11 +6,11 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 22:39:57 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/20 22:40:03 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/21 05:11:11 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	if (!s1 || !s2)
 		return (0);

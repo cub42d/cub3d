@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 04:25:57 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/21 04:47:17 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ struct s_map
 };
 
 void	parse_main(t_map *map, char *argv);
+void	parse_texture(t_map *map, int file);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/21 04:12:54 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/21 04:47:25 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ INCLUDE				:=	./include/
 SRCS				+=	main.c
 
 #	parser srcs
-SRCS				+=	$(addsuffix .c, parse_main )
+SRCS				+=	$(addsuffix .c, parse_main parse_texture)
 
 #	utils srcs
 
