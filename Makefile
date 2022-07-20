@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/18 20:41:40 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/20 22:05:45 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ LIBMLX				:=	libmlx.dylib
 
 #	header
 INCLUDE				:=	./include/
-INCLUDE_FILES		:=	$(addsuffix .h, $(addprefix $(INCLUDE), \
-						))
+
 #	srcs
-SRCS				:=	$(addsuffix .c, \
-						)
+SRCS				:=	\
+						ft_close.c ft_free.c ft_malloc.c \
+						ft_open.c ft_perror_exit.c ft_perror.c \
+						ft_putstr_fd.c ft_strlen.c ft_strutil.c \
+						get_next_line.c
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
@@ -37,7 +39,7 @@ OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 all					:	$(LIBMLX) $(NAME)
 
 $(NAME)				:	$(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
+	$(CC) $(CFLAGS) $(LIBMLX) $(OBJS) -o $@
 
 $(OBJS_DIR)			:
 	@if [ ! -d $(OBJS_DIR) ]; then \
