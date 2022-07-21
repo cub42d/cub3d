@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 06:02:03 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/22 06:25:26 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/22 06:25:33 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "utils.h"
 
-typedef struct s_map		t_map;
-
-struct s_map
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		f;
-	int		c;
-	char	**arr;
-	int		width;
-	int		height;
-};
+	char	*ret;
+	size_t	len_s1;
 
-void	parse_main(t_map *map, char *argv);
-void	parse_texture(t_map *map, int file);
-
-#endif
+	if (!s1 || !set)
+		return (NULL);
+	while (ft_strchr(set, *s1) && *s1 != '\0')
+		s1++;
+	len_s1 = ft_strlen(s1);
+	while (ft_strchr(set, *(s1 + len_s1)) && len_s1 > 0)
+		len_s1--;
+	ret = ft_substr(s1, 0, len_s1 + 1);
+	if (!ret)
+		return (NULL);
+	return (ret);
+}

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 05:10:21 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 05:10:55 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/22 06:44:13 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	**ft_split(const char *str, char *sep)
 	char	**ret;
 	size_t	ret_size;
 
+	if (!str)
+		return (NULL);
 	ret_size = get_size(str, sep);
 	ret = ft_malloc(sizeof(char *) * (ret_size + 1));
 	split_string(ret, str, sep);
