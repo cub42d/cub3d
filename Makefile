@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/18 20:42:18 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/21 20:31:40 by hyunkkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME				:=	cub3D
 VPATH				:=	$(shell ls -R)
 
 CC					:=	cc
-CFLAGS				:=	-Wall -Wextra -Werror
+CFLAGS				:=	-Wall -Wextra -Werror -g
 RM					:=	rm -rf
 
 #	mlx
@@ -46,6 +46,9 @@ $(OBJS_DIR)			:
 
 $(OBJS_DIR)%.o		:	%.c
 	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
+
+$(LIBFT)			:
+	make -C $(LIBFT_DIR) all
 
 $(LIBMLX)			:
 	make -C $(LIBMLX_DIR) all
