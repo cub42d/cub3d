@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 07:19:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/22 07:37:38 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "parser.h"
+#include "macro.h"
+#include "utils.h"
 
-typedef struct s_map		t_map;
-
-struct s_map
+static void	get_map_size(t_map *map, int file)
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		f;
-	int		c;
-	char	**arr;
-	int		width;
-	int		height;
-};
+	char	*temp;
 
-void	parse_main(t_map *map, char *argv);
-void	parse_texture(t_map *map, int file);
-void	parse_map(t_map *map, int file);
+	while (get_next_line(file, temp))
+	{
 
-#endif
+	}
+}
+
+void	parse_map(t_map *map, int file)
+{
+	get_map_size(map, file);
+}

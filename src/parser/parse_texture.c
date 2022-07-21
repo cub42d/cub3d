@@ -6,14 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:32:24 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 07:06:55 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/22 07:16:32 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parser.h"
+#include "macro.h"
 #include "utils.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 static void	free_line(char **line, char ***temp)
 {
