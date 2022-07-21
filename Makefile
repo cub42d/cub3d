@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/21 04:47:25 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/22 05:15:30 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,10 @@ SRCS				+=	main.c
 SRCS				+=	$(addsuffix .c, parse_main parse_texture)
 
 #	utils srcs
-
 SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
-						ft_free ft_iseq ft_malloc ft_memset ft_open \
+						ft_free ft_iseq ft_malloc ft_memcpy ft_memset ft_open \
 						ft_perror_exit ft_perror ft_putendl_fd ft_putstr_fd \
-						ft_strchr ft_strcmp ft_strlen ft_strutil \
+						ft_strchr ft_strcmp ft_strlen ft_strutil ft_split \
 						get_next_line)
 
 OBJS_DIR			:=	./objs/
