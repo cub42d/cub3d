@@ -10,8 +10,28 @@
 
 typedef enum { DIR_N = 0, DIR_E, DIR_W, DIR_S } dir_t;
 
+typedef struct s_tex
+{
+	char	*img_path;
+	void	*img_ptr;
+	int		*texture;
+	int		px_wid;
+	int		px_hei;
+}	t_tex;
+
+typedef struct s_wall
+{
+	/* data */
+	double	wall_x;
+	double	wall_y;
+	dir_t	wall_dir;
+	double	wall_dist;
+}	t_wall;
+
 typedef struct s_view
 {
+	t_tex	tex;
+	t_wall	wl;
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
@@ -22,8 +42,6 @@ typedef struct s_view
 	double	px;
 	double	py;
 	double	theta;
-	double	wall_dist;
-	dir_t	wall_dir;
 }	t_view;
 
 # define	EPS	(1e-06)

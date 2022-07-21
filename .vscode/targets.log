@@ -1,0 +1,378 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Thu Jul 21 19:58:56 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/hyunkkim/cub3d
+# makefile
+SHELL = /bin/sh
+# makefile (from `Makefile', line 18)
+RM := rm -rf
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 17)
+CFLAGS := -Wall -Wextra -Werror -g
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 21)
+LIBMLX_DIR := mlx
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 34)
+OBJS := ./objs/main.o
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000clhr0034w6/T/vscode-ipc-29b2363b-fd08-49d7-9a4d-fe8980bd384d.sock
+# environment
+VSCODE_CWD = /
+# environment
+PATH = /Users/hyunkkim/.brew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+# makefile (from `Makefile', line 22)
+LIBMLX_INCLUDE := mlx
+# makefile (from `Makefile', line 14)
+VPATH := Makefile cub3D include libmlx.dylib main.c mlx objs texture  ./include: ray_casting.h  ./mlx: Makefile font.c interface.o interface.swift libmlx.dylib man mlx.h mlx_image.o mlx_image.swift mlx_image.swiftdoc mlx_image.swiftmodule mlx_image.swiftsourceinfo mlx_init.o mlx_init.swift mlx_init.swiftdoc mlx_init.swiftmodule mlx_init.swiftsourceinfo mlx_png.c mlx_png.o mlx_rgb.c mlx_string_put.c mlx_string_put.o mlx_window.o mlx_window.swift mlx_window.swiftdoc mlx_window.swiftmodule mlx_window.swiftsourceinfo mlx_xpm.c mlx_xpm.o  ./mlx/man: man3  ./mlx/man/man3: mlx.3 mlx_loop.3 mlx_new_image.3 mlx_new_window.3 mlx_pixel_put.3  ./objs: main.o  ./texture: W3d_protobluewall1.png W3d_protograywallshade1.png W3d_protoredbrick1.png Wolf3D_Door1proto.png red_brick_wall.xpm wall1.xpm
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# makefile (from `Makefile', line 27)
+INCLUDE_FILES := ./include/ray_casting.h
+# makefile (from `Makefile', line 23)
+LIBMLX := libmlx.dylib
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.herYIIQZkn/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/hyunkkim/cub3d
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/hyunkkim
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/hyunkkim/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# environment
+LOGNAME = hyunkkim
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `Makefile', line 30)
+SRCS := main.c
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 16)
+CC := cc
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = hyunkkim
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 26)
+INCLUDE := ./include/
+# makefile (from `Makefile', line 13)
+NAME := cub3D
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000clhr0034w6/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/hyunkkim/Library/Application Support/Code/1.67.2-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MAIL = hyunkkim@student.42seoul.kr
+# environment
+XPC_SERVICE_NAME = com.microsoft.VSCode.1124
+# makefile (from `Makefile', line 33)
+OBJS_DIR := ./objs/
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x19386:0x3:0x33
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+VSCODE_PID = 60566
+# variable set hash-table stats:
+# Load=74/1024=7%, Rehash=0, Collisions=5/113=4%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# ./objs (device 16777225, inode 3376366): No files, no impossibilities so far.
+# ./mlx (device 16777225, inode 3349481): No files, no impossibilities so far.
+# W3d_protoredbrick1.png: could not be stat'd.
+# mlx_loop.3: could not be stat'd.
+# mlx_string_put.o: could not be stat'd.
+# interface.o: could not be stat'd.
+# ./include (device 16777225, inode 3349567): No files, no impossibilities so far.
+# mlx_new_image.3: could not be stat'd.
+# Makefile (device 16777225, inode 3349480): could not be opened.
+# include (device 16777225, inode 3349567): No files, no impossibilities so far.
+# . (device 16777225, inode 3349334): 13 files, no impossibilities.
+# red_brick_wall.xpm: could not be stat'd.
+# mlx_png.c: could not be stat'd.
+# mlx_init.swiftdoc: could not be stat'd.
+# mlx_image.swift: could not be stat'd.
+# ray_casting.h: could not be stat'd.
+# man: could not be stat'd.
+# main.o: could not be stat'd.
+# mlx_xpm.c: could not be stat'd.
+# mlx_window.o: could not be stat'd.
+# mlx_init.swiftsourceinfo: could not be stat'd.
+# ./mlx/man/man3 (device 16777225, inode 3349486): No files, no impossibilities so far.
+# Wolf3D_Door1proto.png: could not be stat'd.
+# mlx.h: could not be stat'd.
+# mlx_init.swiftmodule: could not be stat'd.
+# mlx (device 16777225, inode 3349481): No files, no impossibilities so far.
+# mlx_string_put.c: could not be stat'd.
+# man3: could not be stat'd.
+# objs (device 16777225, inode 3376366): No files, no impossibilities so far.
+# mlx.3: could not be stat'd.
+# W3d_protograywallshade1.png: could not be stat'd.
+# libmlx.dylib (device 16777225, inode 3376365): could not be opened.
+# mlx_window.swiftdoc: could not be stat'd.
+# mlx_init.swift: could not be stat'd.
+# mlx_window.swiftsourceinfo: could not be stat'd.
+# mlx_image.o: could not be stat'd.
+# wall1.xpm: could not be stat'd.
+# interface.swift: could not be stat'd.
+# main.c (device 16777225, inode 3349508): could not be opened.
+# W3d_protobluewall1.png: could not be stat'd.
+# mlx_pixel_put.3: could not be stat'd.
+# font.c: could not be stat'd.
+# cub3D (device 16777225, inode 3401855): could not be opened.
+# mlx_new_window.3: could not be stat'd.
+# mlx_window.swiftmodule: could not be stat'd.
+# ./mlx/man (device 16777225, inode 3349485): No files, no impossibilities so far.
+# mlx_png.o: could not be stat'd.
+# mlx_image.swiftmodule: could not be stat'd.
+# mlx_window.swift: could not be stat'd.
+# mlx_image.swiftdoc: could not be stat'd.
+# mlx_xpm.o: could not be stat'd.
+# ./texture (device 16777225, inode 3366854): No files, no impossibilities so far.
+# mlx_rgb.c: could not be stat'd.
+# texture (device 16777225, inode 3366854): No files, no impossibilities so far.
+# mlx_image.swiftsourceinfo: could not be stat'd.
+# mlx_init.o: could not be stat'd.
+
+# 13 files, no impossibilities in 56 directories.
+
+# Implicit Rules
+
+objs/%.o: %.c
+#  commands to execute (from `Makefile', line 48):
+	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+objs/main.o: main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `main'
+#  Last modified 2022-07-21 19:56:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 48):
+	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
+	
+
+ 
+all: libmlx.dylib cub3D
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+.PHONY: all clean fclean re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-21 19:56:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+cub3D: objs/ objs/main.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-21 19:56:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 40):
+	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
+	
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-21 19:58:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/:
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-21 19:56:41
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 43):
+	@if [ ! -d $(OBJS_DIR) ]; then \
+	mkdir -p $(OBJS_DIR); \
+	fi
+	
+
+fclean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 63):
+	$(MAKE) clean
+	$(RM) $(NAME) $(LIBMLX)
+	make -C $(LIBMLX_DIR) clean
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libmlx.dylib:
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-20 20:44:12
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 54):
+	make -C $(LIBMLX_DIR) all
+	cp $(LIBMLX_DIR)/$(LIBMLX) ./
+	
+
+re:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 69):
+	$(MAKE) fclean
+	$(MAKE) all
+	
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 59):
+	$(RM) $(OBJS_DIR)
+	
+
+# files hash-table stats:
+# Load=13/1024=1%, Rehash=0, Collisions=0/40=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# General (`VPATH' variable) search path:
+# include:mlx:objs:texture:./include:./mlx:./mlx/man:./mlx/man/man3:./objs:./texture
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Thu Jul 21 19:58:56 2022
+
+ 

@@ -149,7 +149,7 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 	return (is_hit);
 }
 
-double	cast_single_ray(int x, double px, double py, double theta, dir_t *dir)
+double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 {
 	double	ray;
 	dir_t	wall_dir;
@@ -157,12 +157,14 @@ double	cast_single_ray(int x, double px, double py, double theta, dir_t *dir)
 	double	wall_y;
 	double	wall_dist;
 
-	(void)dir;
 	ray = (theta + FOVH_2) - (x * ANGLE_PER_PIXEL);
 	if (get_wall_intersection(ray, px, py, &wall_dir, &wall_x, &wall_y) == FALSE)
 		return (INFINITY);
 	wall_dist = l2dist(px, py, wall_x, wall_y);
 	wall_dist *= cos(theta - ray);
+	vu->wl.wall_x = wall_x;
+	vu->wl.wall_y = wall_y;
+	vu->wl.wall_dir = wall_dir;
 	return (wall_dist);
 }
 
@@ -204,9 +206,57 @@ void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 	my_mlx_pixel_put(vu, x, y_start, y_end, color);
 }
 
+void	put_pixel(t_view *vu, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = vu->addr + (y * vu->line_len + x * (vu->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	get_wall_texture(t_view *vu, int tx, int ty)
+{
+	int	ret;
+
+	ret = vu->tex.texture[(vu->tex.px_wid * ty) + tx];
+	return (ret);
+}
+
+void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
+{
+	// draw pixels by xpm and wall distance;
+	double	texture_ratio;
+	int		tx;
+	int		ty;
+	int		wall_height;
+	int		y0;
+	int		y1;
+	int		y_start;
+	int		y_end;
+	int		color;
+
+	if (vu->wl.wall_dir == DIR_W || vu->wl.wall_dir == DIR_E)
+		texture_ratio = vu->wl.wall_y - floor(vu->wl.wall_y);
+	else
+		texture_ratio = vu->wl.wall_x - floor(vu->wl.wall_x);
+	tx = (int)(texture_ratio * vu->tex.px_wid);
+	wall_height = get_wall_height(wall_dist);
+	y0 = (int)((SY - wall_height) / 2.0);
+	y1 = y0 + wall_height - 1;
+	y_start = max(0, y0);
+	y_end = min(SY - 1, y1);
+	while (y_start <= y_end)
+	{
+		ty = (int)((double)(y_start - y0) * vu->tex.px_hei / wall_height);
+		color = get_wall_texture(vu, tx, ty);
+		put_pixel(vu, x, y_start, color);
+		y_start++;
+	}
+}
+
 void	render(t_view *vu)
 {
-	static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
+	// static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
 	int		x;			/* ? */
 
 	x = 0;
@@ -215,8 +265,8 @@ void	render(t_view *vu)
 	x = 0;
 	while (x < SX)
 	{
-		vu->wall_dist = cast_single_ray(x, vu->px, vu->py, vu->theta, &(vu->wall_dir));
-		draw_wall(vu, vu->wall_dist, x, wall_colors[vu->wall_dir]);
+		vu->wl.wall_dist = cast_single_ray(vu, x, vu->px, vu->py, vu->theta);
+		draw_wall_by_xpm(vu, x, vu->wl.wall_dist);
 		x++;
 	}
 	mlx_put_image_to_window(vu->mlx, vu->mlx_win, vu->img, 0, 0);
@@ -315,6 +365,11 @@ int	main(int argc, char **argv)
 	vu.mlx_win = mlx_new_window(vu.mlx, SX, SY, "ray_casting tuto");
 	vu.img = mlx_new_image(vu.mlx, SX, SY);
 	vu.addr = mlx_get_data_addr(vu.img, &vu.bpp, &vu.line_len, &vu.endian);
+	vu.tex.img_path = "./texture/red_brick_wall.xpm";
+	vu.tex.px_wid = 64;
+	vu.tex.px_hei = 64;
+	vu.tex.img_ptr = mlx_xpm_file_to_image(vu.mlx, vu.tex.img_path, &vu.tex.px_wid, &vu.tex.px_hei);
+	vu.tex.texture = (int *)(mlx_get_data_addr(vu.tex.img_ptr, &vu.bpp, &vu.line_len, &vu.endian));
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);

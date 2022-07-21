@@ -6,7 +6,7 @@
 #    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/17 15:18:40 by hyunkkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/21 19:58:56 by hyunkkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME				:=	cub3D
 VPATH				:=	$(shell ls -R)
 
 CC					:=	cc
-CFLAGS				:=	-Wall -Wextra -Werror
-RM					:=	rm -f
+CFLAGS				:=	-Wall -Wextra -Werror -g
+RM					:=	rm -rf
 
 #	mlx
 LIBMLX_DIR			:=	mlx
@@ -39,9 +39,9 @@ all					:	$(LIBMLX) $(NAME)
 $(NAME)				:	$(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
 
-$(OBJ_DIR)			:
-	@if [ ! -d $(OBJ_DIR) ]; then \
-		mkdir -p $(OBJ_DIR); \
+$(OBJS_DIR)			:
+	@if [ ! -d $(OBJS_DIR) ]; then \
+		mkdir -p $(OBJS_DIR); \
 	fi
 
 $(OBJS_DIR)%.o		:	%.c
@@ -56,7 +56,7 @@ $(LIBMLX)			:
 
 .PHONY				:	clean
 clean				:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 .PHONY				:	fclean
 fclean				:
