@@ -219,6 +219,7 @@ int	get_wall_texture(t_view *vu, int tx, int ty)
 	int	ret;
 
 	ret = vu->tex.texture[(vu->tex.px_wid * ty) + tx];
+	// ret = 0xffaaff;
 	return (ret);
 }
 
@@ -369,7 +370,7 @@ int	main(int argc, char **argv)
 	vu.tex.px_wid = 64;
 	vu.tex.px_hei = 64;
 	vu.tex.img_ptr = mlx_xpm_file_to_image(vu.mlx, vu.tex.img_path, &vu.tex.px_wid, &vu.tex.px_hei);
-	vu.tex.texture = (int *)(mlx_get_data_addr(vu.tex.img_ptr, &vu.bpp, &vu.line_len, &vu.endian));
+	vu.tex.texture = (int *)(mlx_get_data_addr(vu.tex.img_ptr, &vu.tex.tex_bpp, &vu.tex.tex_line_len, &vu.tex.tex_endian));
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);

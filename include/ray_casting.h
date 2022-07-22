@@ -17,6 +17,9 @@ typedef struct s_tex
 	int		*texture;
 	int		px_wid;
 	int		px_hei;
+	int		tex_bpp;
+	int		tex_line_len;
+	int		tex_endian;
 }	t_tex;
 
 typedef struct s_wall

@@ -1,6 +1,11 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/hyunkkim/cub3d'
-make: Nothing to be done for `all'.
- 
-make: Leaving directory `/Users/hyunkkim/cub3d'
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/User/Documents/42circus/small_c3d'
+make -C mlx all
+cp mlx/libmlx.dylib ./
+if [ ! -d ./objs/ ]; then \
+		mkdir -p ./objs/; \
+	fi
+cc -Wall -Wextra -Werror -g -Imlx -I./include/ -c main.c -o objs/main.o
+cc -Wall -Wextra -Werror -g ./objs/main.o libmlx.dylib -o cub3D
+make: Leaving directory `/Users/User/Documents/42circus/small_c3d'
  
