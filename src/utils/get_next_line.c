@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:20:56 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/23 10:35:35 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/23 17:03:24 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static void	division(char **save, char **line, int ret)
 	i = 0;
 	if (ret == 0)
 	{
-		*line = ft_strdup(*save);
+		if (*save && **save == '\0')
+			*line = NULL;
+		else
+			*line = ft_strdup(*save);
 		ft_free((void **)&(*save));
 	}
 	else if (ret > 0)
@@ -69,7 +72,7 @@ int	get_next_line(int fd, char **line)
 	int			ret;
 
 	if (fd < 0 || fd > 256 || !line)
-		ft_error_exit(FILE_ERROR);
+		ft_error_exit(MAP_ERROR);
 	if (save[fd] == NULL)
 		save[fd] = ft_strdup("");
 	ret = 1;

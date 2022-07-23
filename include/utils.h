@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 06:25:44 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/23 07:00:49 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_error_exit(char *s);
 void	ft_free(void **ptr);
 void	ft_double_free(char ***ptr);
 int		ft_iseq(char *s1, char *s2);
+int		ft_isspace(char c);
 void	*ft_malloc(size_t size);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);

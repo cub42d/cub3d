@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:32:24 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 07:16:32 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/23 17:08:08 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	parse_texture(t_map *map, int file)
 	while (i < 6)
 	{
 		get_next_line(file, &line);
+		if (!line)
+			ft_error_exit(MAP_ERROR);
 		temp = ft_split(line, ", \n");
 		if (!*temp)
 		{
