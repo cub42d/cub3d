@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/23 18:00:19 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/23 18:08:13 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	get_map(t_map *map, t_parse *temp)
 		if (map->height >= temp->size)
 		{
 			temp->size <<= 1;
-			temp->prv = ft_malloc(sizeof(char *) * (temp->size));
+			temp->prv = ft_calloc(sizeof(char *) * (temp->size));
 			ft_memcpy(temp->prv, temp->arr, (map->height * sizeof(char *)));
 			free(temp->arr);
 			temp->arr = temp->prv;
