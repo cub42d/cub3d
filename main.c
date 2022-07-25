@@ -219,7 +219,6 @@ int	get_wall_texture(t_view *vu, int tx, int ty)
 	int	ret;
 
 	ret = vu->tex.texture[(vu->tex.px_wid * ty) + tx];
-	// ret = 0xffaaff;
 	return (ret);
 }
 
