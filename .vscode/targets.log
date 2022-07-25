@@ -231,6 +231,7 @@ all: libmlx.dylib cub3D
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
+
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
@@ -257,6 +258,7 @@ cub3D: objs objs/main.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+
 #  Last modified 2022-07-21 20:31:40
 #  File has been updated.
 #  Successfully updated.
@@ -354,5 +356,6 @@ clean:
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
 # Finished Make data base on Thu Jul 21 20:31:47 2022
+
 
  

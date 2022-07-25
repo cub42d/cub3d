@@ -5,8 +5,6 @@ cp mlx/libmlx.dylib ./
 if [ ! -d ./objs/ ]; then \
 		mkdir -p ./objs/; \
 	fi
- 
 cc -Wall -Wextra -Werror -g -Imlx -I./include/ -c main.c -o objs/main.o
 cc -Wall -Wextra -Werror -g ./objs/main.o libmlx.dylib -o cub3D
 make: Leaving directory `/Users/hyunkkim/cub3d'
- 
