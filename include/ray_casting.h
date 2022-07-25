@@ -45,6 +45,8 @@ typedef struct s_view
 	double	px;
 	double	py;
 	double	theta;
+	int		ceiling_colour;
+	int		floor_colour;
 }	t_view;
 
 # define	EPS	(1e-06)

@@ -206,6 +206,19 @@ void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 	my_mlx_pixel_put(vu, x, y_start, y_end, color);
 }
 
+void	clear_window(t_view *vu)
+{
+	int	x;
+
+	x = 0;
+	while (x < SX)
+	{
+		my_mlx_pixel_put(vu, x, 0, SY / 2, vu->ceiling_colour);
+		my_mlx_pixel_put(vu, x, SY / 2, SY, vu->floor_colour);
+		x++;
+	}
+}
+
 void	put_pixel(t_view *vu, int x, int y, int color)
 {
 	char	*dst;
@@ -261,9 +274,7 @@ void	render(t_view *vu)
 	// static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
 	int		x;			/* ? */
 
-	x = 0;
-	while (x < SX)
-		my_mlx_pixel_put(vu, x++, 0, SY - 1, 0X000000);
+	clear_window(vu);
 	x = 0;
 	while (x < SX)
 	{
@@ -383,6 +394,8 @@ int	main(int argc, char **argv)
 	define_wall_texture(&vu, "./texture/grey_wall.xpm", 1);
 	define_wall_texture(&vu, "./texture/steel_wall.xpm", 2);
 	define_wall_texture(&vu, "./texture/blue_wall.xpm", 3);
+	vu.floor_colour = 0x333333;
+	vu.ceiling_colour = 0x777777;
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);
