@@ -214,17 +214,18 @@ void	put_pixel(t_view *vu, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	get_wall_texture(t_view *vu, int tx, int ty)
+int	get_wall_texture(t_tex *tex, int tx, int ty)
 {
 	int	ret;
 
-	ret = vu->tex.texture[(vu->tex.px_wid * ty) + tx];
+	ret = tex->texture[(tex->px_wid * ty) + tx];
 	return (ret);
 }
 
 void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 {
 	// draw pixels by xpm and wall distance;
+	t_tex	*wall_texture;
 	double	texture_ratio;
 	int		tx;
 	int		ty;
@@ -239,7 +240,8 @@ void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 		texture_ratio = vu->wl.wall_y - floor(vu->wl.wall_y);
 	else
 		texture_ratio = vu->wl.wall_x - floor(vu->wl.wall_x);
-	tx = (int)(texture_ratio * vu->tex.px_wid);
+	wall_texture = &vu->tex_wall[vu->wl.wall_dir];
+	tx = (int)(texture_ratio * wall_texture->px_wid);
 	wall_height = get_wall_height(wall_dist);
 	y0 = (int)((SY - wall_height) / 2.0);
 	y1 = y0 + wall_height - 1;
@@ -247,8 +249,8 @@ void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 	y_end = min(SY - 1, y1);
 	while (y_start <= y_end)
 	{
-		ty = (int)((double)(y_start - y0) * vu->tex.px_hei / wall_height);
-		color = get_wall_texture(vu, tx, ty);
+		ty = (int)((double)(y_start - y0) * wall_texture->px_hei / wall_height);
+		color = get_wall_texture(wall_texture, tx, ty);
 		put_pixel(vu, x, y_start, color);
 		y_start++;
 	}
@@ -352,6 +354,18 @@ int	key_down_event(int keycode, t_view *vu)
 	return (0);
 }
 
+void	define_wall_texture(t_view *vu, char *img_dir, int i)
+{
+	vu->tex_wall[i].img_path = img_dir;
+	vu->tex_wall[i].px_wid = 64;
+	vu->tex_wall[i].px_hei = 64;
+	vu->tex_wall[i].img_ptr = mlx_xpm_file_to_image(vu->mlx, \
+	vu->tex_wall[i].img_path, &vu->tex_wall[i].px_wid, &vu->tex_wall[i].px_hei);
+	vu->tex_wall[i].texture = (int *)(mlx_get_data_addr(\
+	vu->tex_wall[i].img_ptr, &vu->tex_wall[i].tex_bpp, \
+	&vu->tex_wall[i].tex_line_len, &vu->tex_wall[i].tex_endian));
+}
+
 int	main(int argc, char **argv)
 {
 	t_view	vu;
@@ -365,11 +379,10 @@ int	main(int argc, char **argv)
 	vu.mlx_win = mlx_new_window(vu.mlx, SX, SY, "ray_casting tuto");
 	vu.img = mlx_new_image(vu.mlx, SX, SY);
 	vu.addr = mlx_get_data_addr(vu.img, &vu.bpp, &vu.line_len, &vu.endian);
-	vu.tex.img_path = "./texture/red_brick_wall.xpm";
-	vu.tex.px_wid = 64;
-	vu.tex.px_hei = 64;
-	vu.tex.img_ptr = mlx_xpm_file_to_image(vu.mlx, vu.tex.img_path, &vu.tex.px_wid, &vu.tex.px_hei);
-	vu.tex.texture = (int *)(mlx_get_data_addr(vu.tex.img_ptr, &vu.tex.tex_bpp, &vu.tex.tex_line_len, &vu.tex.tex_endian));
+	define_wall_texture(&vu, "./texture/red_brick_wall.xpm", 0);
+	define_wall_texture(&vu, "./texture/grey_wall.xpm", 1);
+	define_wall_texture(&vu, "./texture/steel_wall.xpm", 2);
+	define_wall_texture(&vu, "./texture/blue_wall.xpm", 3);
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);

@@ -33,7 +33,7 @@ typedef struct s_wall
 
 typedef struct s_view
 {
-	t_tex	tex;
+	t_tex	tex_wall[4];
 	t_wall	wl;
 	void	*mlx;
 	void	*mlx_win;
