@@ -8,3 +8,4 @@ cub3d
 *.swiftmodule
 *.swiftsourceinfo
 a.out.DSYM~
+.vscode/
