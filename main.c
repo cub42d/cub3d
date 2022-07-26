@@ -1,13 +1,27 @@
 #include "ray_casting.h"
 
+/**
+ * @brief 주어진 좌표의 맵 /;;;
+ *
+ * @param x
+ * @param y
+ * @return int
+ */
 int	map_get_cell(int x, int y)
 {
 	if (x >= 0 && x < MAPX && y >= 0  && y < MAPY)
 		return (map[x][y]);
+	/* 그게 아니면 -1을 반환 */
 	else
 		return (-1);
 }
 
+/**
+ * @brief 주어진 인자가 양수인지, 음수인지 혹은 0에 가까운 작은 수인지 판별하는 함수
+ *
+ * @param d
+ * @return int : 0에 가까운 경우 0, 양수는 1, 음수는 -1을 반환
+ */
 int	num_sign(double d)
 {
 	if (is_zero(d))
@@ -18,6 +32,15 @@ int	num_sign(double d)
 		return (-1);
 }
 
+/**
+ * @brief 좌표상 두 점 (x0, y0), (x1, y1)의 거리를 계산하는 함수
+ *
+ * @param x0
+ * @param y0
+ * @param x1
+ * @param y1
+ * @return double : 두 점의 거리를 반환
+ */
 double	l2dist(double x0, double y0, double x1, double y1)
 {
 	double	dx;
@@ -28,15 +51,30 @@ double	l2dist(double x0, double y0, double x1, double y1)
 	return (sqrt(dx * dx + dy * dy));
 }
 
+/**
+ * @brief 현낌 제작: 인자 str를 출력하고 1을 반환하는 함수
+ *
+ * @param str
+ * @return int :
+ */
 int	print_err(char *str)
 {
 	printf("%s\n", str);
 	return (1);
 }
 
-int	get_wall_intersection \
-(double ray, double px, double py, \
-dir_t *wall_dir, double *wall_x, double *wall_y)
+/**
+ * @brief 주어진 인자들을 기반으로 인자 ray가 벽에 (어느 부분에 ) 부딪히는지 판별하는 함수
+ *
+ * @param ray
+ * @param px
+ * @param py
+ * @param wall_dir
+ * @param wall_x
+ * @param wall_y
+ * @return int
+ */
+int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, double *wall_x, double *wall_y)
 {
 	int	delta_x;
 	int	delta_y;
@@ -82,7 +120,6 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 		else
 			ny = py;
 	}
-	// printf("\nray=%.2f def, delta_x=%d, delta_y=%d, x_slope=%.2f, y_slope=%.2f, nx=%.2f, ny=%.2f", rad2dig(ray), delta_x, delta_y, x_slope, y_slope, nx, ny);
 	f = INFINITY;
 	g = INFINITY;
 	is_hit = FALSE;
@@ -102,7 +139,6 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 				mapx = (int)nx - 1;
 			mapy = (int)f;
 			hit_side = VERT;
-			// printf("V(%d, %.2f) -> ", mapx, f);
 		}
 		else
 		{
@@ -112,7 +148,6 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 			else
 				mapy = (int)ny - 1;
 			hit_side = HORIZ;
-			// printf("H(%.2f, %d) -> ", g, mapy);
 		}
 		cell = map_get_cell(mapx, mapy);
 		if (cell < 0)
@@ -138,7 +173,6 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 				*wall_y = ny;
 			}
 			is_hit = TRUE;
-			// printf("Hit Wall!!\n");
 			break ;
 		}
 		if (hit_side == VERT)
@@ -149,6 +183,16 @@ dir_t *wall_dir, double *wall_x, double *wall_y)
 	return (is_hit);
 }
 
+/**
+ * @brief 주어진 인자로 벽과의 거리를 잴 ray 하나를 생성하는 함수
+ *
+ * @param vu
+ * @param x
+ * @param px
+ * @param py
+ * @param theta
+ * @return double
+ */
 double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 {
 	double	ray;
@@ -161,13 +205,25 @@ double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 	if (get_wall_intersection(ray, px, py, &wall_dir, &wall_x, &wall_y) == FALSE)
 		return (INFINITY);
 	wall_dist = l2dist(px, py, wall_x, wall_y);
+	/* 시점에 의해 어안효과가 나타나는것을 cos 함수로 보정해줌 */
 	wall_dist *= cos(theta - ray);
+	/* 텍스쳐 적용이 된 벽을 그리기 위해 get_wall_intersection에서 구한 wall_x, wall_y,
+	wall_dir를 구조체에 저장함. */
 	vu->wl.wall_x = wall_x;
 	vu->wl.wall_y = wall_y;
 	vu->wl.wall_dir = wall_dir;
 	return (wall_dist);
 }
 
+/**
+ * @brief 인자 y_start 부터 y_end까지 화면의 가로 위치 x에 세로로 픽셀 라인을 그리는 함수
+ *
+ * @param vu
+ * @param x
+ * @param y_start
+ * @param y_end
+ * @param color
+ */
 void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
 {
 	char	*dst;
@@ -182,6 +238,12 @@ void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
 	}
 }
 
+/**
+ * @brief 벽과의 거리를 기반으로 벽의 높이를 계산하는 함수
+ *
+ * @param dist
+ * @return int
+ */
 int	get_wall_height(double dist)
 {
 	double	fov_h;
@@ -190,6 +252,7 @@ int	get_wall_height(double dist)
 	return ((int)(SY * (WALL_H / fov_h)));
 }
 
+/* 벽과의 거리를 바탕으로 화면의 x에 color색을 가진 벽을 그리는 함수 */
 void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 {
 	int	wall_height;
@@ -206,19 +269,34 @@ void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 	my_mlx_pixel_put(vu, x, y_start, y_end, color);
 }
 
+/**
+ * @brief player가 움직일떄 마다 화면을 업데이트 해주기 위헤 천장과 바닥을 그리는 함수
+ *
+ * @param vu 천장, 바닥 색상에 대한 정보가 들어있는 구조체
+ */
 void	clear_window(t_view *vu)
 {
-	int	x;
+	int	x;		/* 화면의 x - 가로 픽셀을 반복하며 작업하기 위한 인댁스 */
 
 	x = 0;
 	while (x < SX)
 	{
+		/* 세로 0부터 전체 화면의 절반인 (SY / 2)만큼 천장 색깔로 칠함 */
 		my_mlx_pixel_put(vu, x, 0, SY / 2, vu->ceiling_colour);
+		/* 전체 화면의 절반인 (SY / 2) 지점 부터 화면 끝 SY까지 바닥 색깔로 칠함 */
 		my_mlx_pixel_put(vu, x, SY / 2, SY, vu->floor_colour);
 		x++;
 	}
 }
 
+/**
+ * @brief 주어진 인자 x에 color 색깔을 가진 픽셀 하나를 그려주는 함수
+ *
+ * @param vu
+ * @param x
+ * @param y
+ * @param color
+ */
 void	put_pixel(t_view *vu, int x, int y, int color)
 {
 	char	*dst;
@@ -227,6 +305,14 @@ void	put_pixel(t_view *vu, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @brief 텍스쳐 배열에서 (tx, ty)에 해당되는 픽셀 색상을 가져오는 함수
+ *
+ * @param tex 색상을 가져올 텍스쳐 구조체의 포인터
+ * @param tx 가져올 텍스쳐의 x좌표
+ * @param ty 가져올 텍스쳐의 y좌표
+ * @return int : 좌표가 가리키는 해당 텍스쳐 내 색상 값을 반환
+ */
 int	get_wall_texture(t_tex *tex, int tx, int ty)
 {
 	int	ret;
@@ -235,9 +321,15 @@ int	get_wall_texture(t_tex *tex, int tx, int ty)
 	return (ret);
 }
 
+/**
+ * @brief xpm 텍스쳐 색상에 따라 벽과의 거리에 비례해 벽을 그려주는 함수
+ *
+ * @param vu
+ * @param x
+ * @param wall_dist
+ */
 void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 {
-	// draw pixels by xpm and wall distance;
 	t_tex	*wall_texture;
 	double	texture_ratio;
 	int		tx;
@@ -269,24 +361,40 @@ void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 	}
 }
 
+/**
+ * @brief 천장, 바닥, 벽 등 플레이어의 화면을 그리는 함수
+ *
+ * @param vu 플레이어, 맵, 벽 정보가 담긴 구조체
+ */
 void	render(t_view *vu)
 {
-	// static int	wall_colors[] = {0x00ccaaaa, 0x00aaccaa, 0x00aaaacc, 0x00bbbbbb};
-	int		x;			/* ? */
+	int	x;		/* 화면의 x - 가로 픽셀을 반복하며 작업하기 위한 인댁스 */
 
 	clear_window(vu);
 	x = 0;
 	while (x < SX)
 	{
+		/* 플레이어와 벽 거리를 구하기 위해 ray를 쏜다 */
 		vu->wl.wall_dist = cast_single_ray(vu, x, vu->px, vu->py, vu->theta);
+		/* 그 벽 거리를 바탕으로 실제 벽을 그린다. */
 		draw_wall_by_xpm(vu, x, vu->wl.wall_dist);
 		x++;
 	}
+	/* 최종적으로 그린 픽셀들을 이미지로 윈도우에 집어넣는다. */
 	mlx_put_image_to_window(vu->mlx, vu->mlx_win, vu->img, 0, 0);
 }
 
-int	get_move_offset\
-(double theta, int keycode, double amt, double *delta_x, double *delta_y)
+/**
+ * @brief 입력받은 키값에 따라 플레이어가 움직일 변화량 - offset을 계산해주는 함수
+ *
+ * @param theta 플레이어의 현재 시야각
+ * @param keycode 입력받은 키 값
+ * @param amt 키 입력에 따른 최소기본이동값, move_unit
+ * @param delta_x x값 변화량
+ * @param delta_y y값 변화량
+ * @return int : 키 값이 WASD인 경우 0을 반환, 기타 유효하지 않은 키 값의 경우 1을 반환
+ */
+int	get_move_offset(double theta, int keycode, double amt, double *delta_x, double *delta_y)
 {
 	if (keycode == W)
 	{
@@ -313,6 +421,14 @@ int	get_move_offset\
 	return (0);
 }
 
+/**
+ * @brief 입력된 키값에 따라 플레이어 좌표 px, py를 변경해주는 함수
+ *
+ * @param vu 플레이어 정보가 담긴 구조체
+ * @param keycode 입력받은 키 값
+ * @param amt 키 입력에 따른 최소기본이동값, move_unit
+ * @return int : 이동에 성공시 0, 실패시 1
+ */
 int	move_player(t_view *vu, int keycode, double amt)
 {
 	double	delta_x;
@@ -332,6 +448,12 @@ int	move_player(t_view *vu, int keycode, double amt)
 	return (0);
 }
 
+/**
+ * @brief 입력된 키 값에 따라 플레이어의 시야각(theta)을 변경해주는 함수
+ *
+ * @param vu 플레이어 정보가 담긴 구조체
+ * @param delta 변화값
+ */
 void	rotate_player(t_view *vu, double delta)
 {
 	vu->theta += delta;
@@ -342,21 +464,29 @@ void	rotate_player(t_view *vu, double delta)
 	render(vu);
 }
 
+/**
+ * @brief 키 입력 이벤트에 따라 플레이어의 시점, 좌표를 업데이트 해주는 함수
+ *
+ * @param keycode 입력받은 키의 키값, 키 코드
+ * @param vu 플레이어 정보가 담긴 구조체
+ * @return int : 0  mlx_hook 프로토타입에 맞추기 위해 그냥 반환값을 설정함
+ */
 int	key_down_event(int keycode, t_view *vu)
 {
+	/* WASD의 경우 플레이어의 좌표를 업데이트 해줌 */
 	if (keycode == W || keycode == A || keycode == S || keycode == D)
 	{
-		// move player coord;
 		move_player(vu, keycode, MOVE_UNIT);
 	}
+	/* 화살표 좌, 우의 경우 플레이어의 시점만 회전시킴. */
 	else if (keycode == LEFT || keycode == RIGHT)
 	{
-		// rotate player's view;
 		if (keycode == LEFT)
 			rotate_player(vu, ROT_UNIT * 1);
 		else
 			rotate_player(vu, ROT_UNIT * (-1));
 	}
+	/* esc의 경우 게임을 종료시킴 */
 	else if (keycode == ESC)
 	{
 		printf("Exit\n");
@@ -365,6 +495,13 @@ int	key_down_event(int keycode, t_view *vu)
 	return (0);
 }
 
+/**
+ * @brief
+ *
+ * @param vu
+ * @param img_dir
+ * @param i
+ */
 void	define_wall_texture(t_view *vu, char *img_dir, int i)
 {
 	vu->tex_wall[i].img_path = img_dir;
