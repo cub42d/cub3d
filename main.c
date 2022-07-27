@@ -1,23 +1,26 @@
 #include "ray_casting.h"
 
 /**
- * @brief 주어진 좌표의 맵 /;;;
+ * @brief 주어진 좌표의 맵 블록을 확인
+ * map[x][y] 형식으로 직접 접근할때 인덱스가 유효하지 않은 경우 segfault가
+ * 생길 수 있기 때문에 이런 함수를 별도로 만들었음
  *
- * @param x
- * @param y
- * @return int
+ * @param x 확인하고자 하는 맵 블록의 x좌표
+ * @param y 확인하고자 하는 맵 블록의 y좌표
+ * @return int : 주어진 좌표가 유효한 인덱스인 경우 해당 블록을 반환. 아닐시 -1 반환
  */
 int	map_get_cell(int x, int y)
 {
 	if (x >= 0 && x < MAPX && y >= 0  && y < MAPY)
 		return (map[x][y]);
-	/* 그게 아니면 -1을 반환 */
 	else
 		return (-1);
 }
 
 /**
  * @brief 주어진 인자가 양수인지, 음수인지 혹은 0에 가까운 작은 수인지 판별하는 함수
+ * is_zero(), EPS는 부동소수점 실수가 0인지 알아보는것이 정수와 다르기 때문에 사용함
+ * (IEEE 754, 'machine epsilon' 참조)
  *
  * @param d
  * @return int : 0에 가까운 경우 0, 양수는 1, 음수는 -1을 반환
@@ -33,12 +36,12 @@ int	num_sign(double d)
 }
 
 /**
- * @brief 좌표상 두 점 (x0, y0), (x1, y1)의 거리를 계산하는 함수
+ * @brief 좌표상 두 점의 거리를 계산하는 함수
  *
- * @param x0
- * @param y0
- * @param x1
- * @param y1
+ * @param x0 시작점 (x0, y0)의 x좌표
+ * @param y0 시작점 (x0, y0)의 y좌표
+ * @param x1 끝점 (x1, y1)의 x좌표
+ * @param y1 끝점 (x1, y1)의 y좌표
  * @return double : 두 점의 거리를 반환
  */
 double	l2dist(double x0, double y0, double x1, double y1)
@@ -53,9 +56,10 @@ double	l2dist(double x0, double y0, double x1, double y1)
 
 /**
  * @brief 현낌 제작: 인자 str를 출력하고 1을 반환하는 함수
+ * main 함수안에서 exit(1)을 하기 전 메시지를 출력할때 쓰려고 만들었음
  *
- * @param str
- * @return int :
+ * @param str 출력하고자 하는 (에러)메시지
+ * @return int : 언제나 1을 반환
  */
 int	print_err(char *str)
 {
@@ -66,13 +70,13 @@ int	print_err(char *str)
 /**
  * @brief 주어진 인자들을 기반으로 인자 ray가 벽에 (어느 부분에 ) 부딪히는지 판별하는 함수
  *
- * @param ray
- * @param px
- * @param py
- * @param wall_dir
- * @param wall_x
- * @param wall_y
- * @return int
+ * @param ray 화면의 가로 x값에 따른 빛줄기의 각도
+ * @param px 플레이어의 x좌표
+ * @param py 플레이어의 y좌표
+ * @param wall_dir 벽 방향 (NEWS)
+ * @param wall_x ray가 부딪힌 점의 x좌표
+ * @param wall_y ray가 부딪힌 점의 y좌표
+ * @return int : 해당 ray가 벽에 부딪혔다면 1(True), 아니면 0(False)를 반환
  */
 int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, double *wall_x, double *wall_y)
 {
@@ -186,12 +190,12 @@ int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, dou
 /**
  * @brief 주어진 인자로 벽과의 거리를 잴 ray 하나를 생성하는 함수
  *
- * @param vu
- * @param x
- * @param px
- * @param py
- * @param theta
- * @return double
+ * @param vu 게임 내 정보를 담는 구조체
+ * @param x 전체 화면의 x번째 가로 픽셀
+ * @param px 플레이어의 x좌표
+ * @param py 플레이어의 y좌표
+ * @param theta 플레이어의 현재 시점각 (방향각)
+ * @return double : ray를 쏴서 계산한 플레이어와 벽 간의 거리
  */
 double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 {
@@ -201,7 +205,10 @@ double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 	double	wall_y;
 	double	wall_dist;
 
+	/* 전체 시야각(FOVH??)에서 x??번째 ray의 기울기를 ray 변수에 저장 */
+	/* 이해가 안되는게 왜 이걸 화면의 가로에서 모두 구하는건가? */
 	ray = (theta + FOVH_2) - (x * ANGLE_PER_PIXEL);
+	/* 벽과 닿지 않았다면 플레이어와의 거리로 무한을 반환 */
 	if (get_wall_intersection(ray, px, py, &wall_dir, &wall_x, &wall_y) == FALSE)
 		return (INFINITY);
 	wall_dist = l2dist(px, py, wall_x, wall_y);
@@ -216,13 +223,13 @@ double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 }
 
 /**
- * @brief 인자 y_start 부터 y_end까지 화면의 가로 위치 x에 세로로 픽셀 라인을 그리는 함수
+ * @brief 화면의 가로 위치 x에 수직선을 그리는 함수
  *
- * @param vu
- * @param x
- * @param y_start
- * @param y_end
- * @param color
+ * @param vu 게임 내 정보를 담고있는 구조체
+ * @param x 픽셀 수직선의 x좌표
+ * @param y_start 수직선의 y좌표 시작점
+ * @param y_end 픽셀 수직선의 y좌표 끝점
+ * @param color 그릴 픽셀 선의 색깔
  */
 void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
 {
@@ -241,8 +248,8 @@ void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
 /**
  * @brief 벽과의 거리를 기반으로 벽의 높이를 계산하는 함수
  *
- * @param dist
- * @return int
+ * @param dist 플레이어와 벽 사이의 거리
+ * @return int : 주어진 인자를 수식에 넣어 벽의 높이를 int로 반환
  */
 int	get_wall_height(double dist)
 {
@@ -252,7 +259,14 @@ int	get_wall_height(double dist)
 	return ((int)(SY * (WALL_H / fov_h)));
 }
 
-/* 벽과의 거리를 바탕으로 화면의 x에 color색을 가진 벽을 그리는 함수 */
+/**
+ * @brief 벽과의 거리를 바탕으로 화면의 x에 color색을 가진 벽을 그리는 함수
+ *
+ * @param vu 게임의 정보가 담긴 구조체
+ * @param wall_dist 플레이어와 벽과의 거리
+ * @param x 픽셀을 그릴 화면의 가로 x좌표
+ * @param color 그릴 벽의 색깔
+ */
 void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 {
 	int	wall_height;
@@ -292,10 +306,10 @@ void	clear_window(t_view *vu)
 /**
  * @brief 주어진 인자 x에 color 색깔을 가진 픽셀 하나를 그려주는 함수
  *
- * @param vu
- * @param x
- * @param y
- * @param color
+ * @param vu 게임의 정보가 담긴 구조체
+ * @param x 픽셀을 그릴 좌표 (x, y)의 x
+ * @param y 픽셀을 그릴 좌표 (x, y)의 y
+ * @param color 그릴 픽셀의 색깔
  */
 void	put_pixel(t_view *vu, int x, int y, int color)
 {
@@ -324,9 +338,9 @@ int	get_wall_texture(t_tex *tex, int tx, int ty)
 /**
  * @brief xpm 텍스쳐 색상에 따라 벽과의 거리에 비례해 벽을 그려주는 함수
  *
- * @param vu
- * @param x
- * @param wall_dist
+ * @param vu 게임의 정보가 담긴 구조체
+ * @param x 픽셀을 그릴 화면의 가로값, x값
+ * @param wall_dist 플레이어와 벽의 거리
  */
 void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
 {
@@ -387,7 +401,7 @@ void	render(t_view *vu)
 /**
  * @brief 입력받은 키값에 따라 플레이어가 움직일 변화량 - offset을 계산해주는 함수
  *
- * @param theta 플레이어의 현재 시야각
+ * @param theta 플레이어의 현재 시점각 (방향각)
  * @param keycode 입력받은 키 값
  * @param amt 키 입력에 따른 최소기본이동값, move_unit
  * @param delta_x x값 변화량
@@ -496,11 +510,11 @@ int	key_down_event(int keycode, t_view *vu)
 }
 
 /**
- * @brief
+ * @brief 벽 텍스쳐를 가져오는 함수
  *
- * @param vu
- * @param img_dir
- * @param i
+ * @param vu 게임의 정보를 담는 구조체
+ * @param img_dir 가져올 텍스쳐 이미지의 디렉토리 위치 문자열
+ * @param i enum dir_t에 상응하는 인덱스 값 - while문을 위해 임시로 넣은 인자
  */
 void	define_wall_texture(t_view *vu, char *img_dir, int i)
 {
