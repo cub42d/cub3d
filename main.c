@@ -96,16 +96,22 @@ int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, dou
 	double	dist_horiz;
 	int		cell;
 
+	/* ray 방향으로 빛을 쏠때 x, y 축 방향으로 증가 감소를 확인함 */
 	delta_x = num_sign(cos(ray));
 	delta_y = num_sign(sin(ray));
+	/* x_slope : 빛줄기 함수 f(일차함수)의 기울기 */
+	/* 수직선인 경우 delta_x가 0이고, 이때 tan(ray)는 undefined */
 	if (delta_x == 0)
 		x_slope = INFINITY;
 	else
 		x_slope = tan(ray);
+	/* y_slope : 빛줄기 함수의 역함수 g의 기울기 */
+	/* 수평선인 경우에도 1/tan(ray)가 undefined */
 	if (delta_y == 0)
 		y_slope = INFINITY;
 	else
 		y_slope = 1./tan(ray);
+	/* nx, ny : 플레이어에서 출발한 빛이 도착할 x, y 좌표 (정수, 격자의 좌표) */
 	if (delta_x > 0)
 		nx = floor(px) + 1;
 	else
@@ -124,9 +130,11 @@ int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, dou
 		else
 			ny = py;
 	}
+	/* 빛줄기 함수 f와 그 역함수 g의 초기값은 inf로 둠 */
 	f = INFINITY;
 	g = INFINITY;
 	is_hit = FALSE;
+	/* 벽에 부딪힐때까지 반복문을 돌면서  */
 	while (!is_hit)
 	{
 		if (delta_x != 0)
@@ -223,7 +231,7 @@ double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
 }
 
 /**
- * @brief 화면의 가로 위치 x에 수직선을 그리는 함수
+ * @brief 화면의 가로 위치 x에 단색 수직선을 그리는 함수
  *
  * @param vu 게임 내 정보를 담고있는 구조체
  * @param x 픽셀 수직선의 x좌표
@@ -231,7 +239,7 @@ double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
  * @param y_end 픽셀 수직선의 y좌표 끝점
  * @param color 그릴 픽셀 선의 색깔
  */
-void	my_mlx_pixel_put(t_view *vu, int x, int y_start, int y_end, int color)
+void	put_vertical_solid_color_line(t_view *vu, int x, int y_start, int y_end, int color)
 {
 	char	*dst;
 	int		start_point;
@@ -267,7 +275,7 @@ int	get_wall_height(double dist)
  * @param x 픽셀을 그릴 화면의 가로 x좌표
  * @param color 그릴 벽의 색깔
  */
-void	draw_wall(t_view *vu, double wall_dist, int x, int color)
+void	draw_solid_color_wall(t_view *vu, double wall_dist, int x, int color)
 {
 	int	wall_height;
 	int	y0;
@@ -280,7 +288,7 @@ void	draw_wall(t_view *vu, double wall_dist, int x, int color)
 	y1 = y0 + wall_height - 1;
 	y_start = max(0, y0);
 	y_end = min(SY - 1, y1);
-	my_mlx_pixel_put(vu, x, y_start, y_end, color);
+	put_vertical_solid_color_line(vu, x, y_start, y_end, color);
 }
 
 /**
@@ -288,7 +296,7 @@ void	draw_wall(t_view *vu, double wall_dist, int x, int color)
  *
  * @param vu 천장, 바닥 색상에 대한 정보가 들어있는 구조체
  */
-void	clear_window(t_view *vu)
+void	clear_screen(t_view *vu)
 {
 	int	x;		/* 화면의 x - 가로 픽셀을 반복하며 작업하기 위한 인댁스 */
 
@@ -296,9 +304,9 @@ void	clear_window(t_view *vu)
 	while (x < SX)
 	{
 		/* 세로 0부터 전체 화면의 절반인 (SY / 2)만큼 천장 색깔로 칠함 */
-		my_mlx_pixel_put(vu, x, 0, SY / 2, vu->ceiling_colour);
+		put_vertical_solid_color_line(vu, x, 0, SY / 2, vu->ceiling_colour);
 		/* 전체 화면의 절반인 (SY / 2) 지점 부터 화면 끝 SY까지 바닥 색깔로 칠함 */
-		my_mlx_pixel_put(vu, x, SY / 2, SY, vu->floor_colour);
+		put_vertical_solid_color_line(vu, x, SY / 2, SY, vu->floor_colour);
 		x++;
 	}
 }
@@ -342,7 +350,7 @@ int	get_wall_texture(t_tex *tex, int tx, int ty)
  * @param x 픽셀을 그릴 화면의 가로값, x값
  * @param wall_dist 플레이어와 벽의 거리
  */
-void	draw_wall_by_xpm(t_view *vu, int x, double wall_dist)
+void	draw_textured_wall(t_view *vu, int x, double wall_dist)
 {
 	t_tex	*wall_texture;
 	double	texture_ratio;
@@ -384,14 +392,14 @@ void	render(t_view *vu)
 {
 	int	x;		/* 화면의 x - 가로 픽셀을 반복하며 작업하기 위한 인댁스 */
 
-	clear_window(vu);
+	clear_screen(vu);
 	x = 0;
 	while (x < SX)
 	{
 		/* 플레이어와 벽 거리를 구하기 위해 ray를 쏜다 */
 		vu->wl.wall_dist = cast_single_ray(vu, x, vu->px, vu->py, vu->theta);
 		/* 그 벽 거리를 바탕으로 실제 벽을 그린다. */
-		draw_wall_by_xpm(vu, x, vu->wl.wall_dist);
+		draw_textured_wall(vu, x, vu->wl.wall_dist);
 		x++;
 	}
 	/* 최종적으로 그린 픽셀들을 이미지로 윈도우에 집어넣는다. */
