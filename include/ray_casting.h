@@ -10,6 +10,25 @@
 
 typedef enum { DIR_N = 0, DIR_E, DIR_W, DIR_S } dir_t;
 
+typedef struct s_dda
+{
+	/* data */
+	int	delta_x;
+	int	delta_y;
+	double	x_slope;
+	double	y_slope;
+	double	nx;
+	double	ny;
+	double	f_x;
+	double	g_x;
+	int		map_x;
+	int		map_y;
+	double	dist_horiz;
+	double	dist_verti;
+	int		hit_side;
+}	t_dda;
+
+
 typedef struct s_tex
 {
 	char	*img_path;

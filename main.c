@@ -67,142 +67,143 @@ int	print_err(char *str)
 	return (1);
 }
 
+void	get_dda_data_1(t_view *vu, t_dda *dda, double ray)
+{
+
+	/* ray 방향으로 빛을 쏠때 x, y 축 방향으로 증가 감소를 확인함 */
+	dda->delta_x = num_sign(cos(ray));
+	dda->delta_y = num_sign(sin(ray));
+	/* x_slope : 빛줄기 함수 f(일차함수)의 기울기 */
+	/* 수직선인 경우 delta_x가 0이고, 이때 tan(ray)는 undefined */
+	if (dda->delta_x == 0)
+		dda->x_slope = INFINITY;
+	else
+		dda->x_slope = tan(ray);
+	/* y_slope : 빛줄기 함수의 역함수 g의 기울기 */
+	/* 수평선인 경우에도 1/tan(ray)가 undefined */
+	if (dda->delta_y == 0)
+		dda->y_slope = INFINITY;
+	else
+		dda->y_slope = 1./tan(ray);
+	/* nx, ny : 플레이어에서 출발한 빛이 도착할 x, y 좌표 (정수, 격자의 좌표) */
+	if (dda->delta_x > 0)
+		dda->nx = floor(vu->px) + 1;
+	else
+	{
+		if (dda->delta_x < 0)
+			dda->nx = ceil(vu->px) - 1;
+		else
+			dda->nx = vu->px;
+	}
+	if (dda->delta_y > 0)
+		dda->ny = floor(vu->py) + 1;
+	else
+	{
+		if (dda->delta_y < 0)
+			dda->ny = ceil(vu->py) - 1;
+		else
+			dda->ny = vu->py;
+	}
+}
+
+void	get_map_x_y(t_view *vu, t_dda *dda)
+{
+	if (dda->delta_x != 0)
+		dda->f_x = dda->x_slope * (dda->nx - vu->px) + vu->py;
+	if (dda->delta_y != 0)
+		dda->g_x = dda->y_slope * (dda->ny - vu->py) + vu->px;
+	/* ray가 부딪히는 가로, 세로 선 */
+	dda->dist_verti = l2dist(vu->px, vu->py, dda->nx, dda->f_x);
+	dda->dist_horiz = l2dist(vu->px, vu->py, dda->g_x, dda->ny);
+	/* 만약 세로선에 부딪히는게 더 짧으면 */
+	if (dda->dist_verti < dda->dist_horiz)
+	{
+		/* 부딪힌 세로선의 x를 내림하고 */
+		if (dda->delta_x == 1)
+			dda->map_x = (int)dda->nx;
+		else
+			dda->map_x = (int)(dda->nx - 1);
+		dda->map_y = (int)dda->f_x;
+		/* 부딪힌 방향을 세로선으로 설정 */
+		dda->hit_side = VERT;
+	}
+	/* 만약 그게 아니면 - 가로선에 부딪혔다면 */
+	else
+	{
+		dda->map_x = (int)dda->g_x;
+		/* 부딪힌 가로선의 x를 내림하고 */
+		if (dda->delta_y == 1)
+			dda->map_y = (int)dda->ny;
+		else
+			dda->map_y = (int)(dda->ny - 1);
+		/* 부딪힌 방향을 가로선으로 설정 */
+		dda->hit_side = HORIZ;
+	}
+}
+
+void	get_ray_wall_var(t_view *vu, t_dda *dda)
+{
+	/* 부딪힌 방향이 세로선인 경우 */
+	if (dda->hit_side == VERT)
+	{
+		/* ??? */
+		if (dda->delta_x > 0)
+			vu->wl.wall_dir = DIR_W;
+		else
+			vu->wl.wall_dir = DIR_E;
+		vu->wl.wall_x = dda->nx;
+		vu->wl.wall_y = dda->f_x;
+	}
+	else
+	{
+		if (dda->delta_y > 0)
+			vu->wl.wall_dir = DIR_S;
+		else
+			vu->wl.wall_dir = DIR_N;
+		vu->wl.wall_x = dda->g_x;
+		vu->wl.wall_y = dda->ny;
+	}
+}
+
 /**
  * @brief 주어진 인자들을 기반으로 인자 ray가 벽에 (어느 부분에 ) 부딪히는지 판별하는 함수
  *
+ * @param vu 게임의 정보를 담고 있는 구조체
  * @param ray 화면의 가로 x값에 따른 빛줄기의 각도
- * @param px 플레이어의 x좌표
- * @param py 플레이어의 y좌표
- * @param wall_dir 벽 방향 (NEWS)
- * @param wall_x ray가 부딪힌 점의 x좌표
- * @param wall_y ray가 부딪힌 점의 y좌표
  * @return int : 해당 ray가 벽에 부딪혔다면 1(True), 아니면 0(False)를 반환
  */
-int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, double *wall_x, double *wall_y)
+int	get_wall_intersection(t_view *vu, double ray)
 {
-	int	delta_x;
-	int	delta_y;
-	double	x_slope;
-	double	y_slope;
-	double	nx;
-	double	ny;
-	double	f;
-	double	g;
-	int		is_hit;
-	int		hit_side;
-	int		mapx;
-	int		mapy;
-	double	dist_verti;
-	double	dist_horiz;
+	t_dda	dda;		/* dda algorithm 계산을 위한 구조체 */
 	int		cell;
+	int		is_hit;
 
-	/* ray 방향으로 빛을 쏠때 x, y 축 방향으로 증가 감소를 확인함 */
-	delta_x = num_sign(cos(ray));
-	delta_y = num_sign(sin(ray));
-	/* x_slope : 빛줄기 함수 f(일차함수)의 기울기 */
-	/* 수직선인 경우 delta_x가 0이고, 이때 tan(ray)는 undefined */
-	if (delta_x == 0)
-		x_slope = INFINITY;
-	else
-		x_slope = tan(ray);
-	/* y_slope : 빛줄기 함수의 역함수 g의 기울기 */
-	/* 수평선인 경우에도 1/tan(ray)가 undefined */
-	if (delta_y == 0)
-		y_slope = INFINITY;
-	else
-		y_slope = 1./tan(ray);
-	/* nx, ny : 플레이어에서 출발한 빛이 도착할 x, y 좌표 (정수, 격자의 좌표) */
-	if (delta_x > 0)
-		nx = floor(px) + 1;
-	else
-	{
-		if (delta_x < 0)
-			nx = ceil(px) - 1;
-		else
-			nx = px;
-	}
-	if (delta_y > 0)
-		ny = floor(py) + 1;
-	else
-	{
-		if (delta_y < 0)
-			ny = ceil(py) - 1;
-		else
-			ny = py;
-	}
+	/* dda 구조체 내의 변수들의 초기 설정은 init 함수로 따로 분류하는 편이 좋을듯 */
+	get_dda_data_1(vu, &dda, ray);
 	/* 빛줄기 함수 f와 그 역함수 g의 초기값은 inf로 둠 */
-	f = INFINITY;
-	g = INFINITY;
+	dda.f_x = INFINITY;
+	dda.g_x = INFINITY;
 	is_hit = FALSE;
 	/* 벽에 부딪힐때까지 반복문을 돌면서 연산을 수행 */
 	while (!is_hit)
 	{
-		if (delta_x != 0)
-			f = x_slope * (nx - px) + py;
-		if (delta_y != 0)
-			g = y_slope * (ny - py) + px;
-		/* ray가 부딪히는 가로, 세로 선 */
-		dist_verti = l2dist(px, py, nx, f);
-		dist_horiz = l2dist(px, py, g, ny);
-		/* 만약 세로선에 부딪히는게 더 짧으면 */
-		if (dist_verti < dist_horiz)
-		{
-			/* 부딪힌 세로선의 x를 내림하고 */
-			if (delta_x == 1)
-				mapx = (int)nx;
-			else
-				mapx = (int)nx - 1;
-			mapy = (int)f;
-			/* 부딪힌 방향을 세로선으로 설정 */
-			hit_side = VERT;
-		}
-		/* 만약 그게 아니면 - 가로선에 부딪혔다면 */
-		else
-		{
-			mapx = (int)g;
-			/* 부딪힌 가로선의 x를 내림하고 */
-			if (delta_y == 1)
-				mapy = (int)ny;
-			else
-				mapy = (int)ny - 1;
-			/* 부딪힌 방향을 가로선으로 설정 */
-			hit_side = HORIZ;
-		}
+		get_map_x_y(vu, &dda);
 		/* 앞서 x 혹은 y를 정수형으로 내림해준건 부딪힌 블록이 벽인지를 확인하기 위함임 */
-		cell = map_get_cell(mapx, mapy);
+		cell = map_get_cell(dda.map_x, dda.map_y);
 		/* 부딪힌 공간이 맵 상에서 벗어난다면 반복문 탈출 */
 		if (cell < 0)
 			break ;
 		/* 부딪힌 공간이 벽이라면 */
 		if (cell == 1)
 		{
-			/* 부딪힌 방향이 세로선인 경우 */
-			if (hit_side == VERT)
-			{
-				/* ??? */
-				if (delta_x > 0)
-					*wall_dir = DIR_W;
-				else
-					*wall_dir = DIR_E;
-				*wall_x = nx;
-				*wall_y = f;
-			}
-			else
-			{
-				if (delta_y > 0)
-					*wall_dir = DIR_S;
-				else
-					*wall_dir = DIR_N;
-				*wall_x = g;
-				*wall_y = ny;
-			}
+			get_ray_wall_var(vu, &dda);
 			is_hit = TRUE;
 			break ;
 		}
-		if (hit_side == VERT)
-			nx += delta_x;
+		if (dda.hit_side == VERT)
+			dda.nx += dda.delta_x;
 		else
-			ny += delta_y;
+			dda.ny += dda.delta_y;
 	}
 	return (is_hit);
 }
@@ -217,29 +218,22 @@ int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, dou
  * @param theta 플레이어의 현재 시점각 (방향각)
  * @return double : ray를 쏴서 계산한 플레이어와 벽 간의 거리
  */
-double	cast_single_ray(t_view *vu, int x, double px, double py, double theta)
+double	cast_single_ray(t_view *vu, int x, double theta)
 {
 	double	ray;
-	dir_t	wall_dir;
-	double	wall_x;
-	double	wall_y;
-	double	wall_dist;
 
 	/* 전체 시야각(FOVH??)에서 x??번째 ray의 기울기를 ray 변수에 저장 */
 	/* 이해가 안되는게 왜 이걸 화면의 가로에서 모두 구하는건가? */
 	ray = (theta + FOVH_2) - (x * ANGLE_PER_PIXEL);
 	/* 벽과 닿지 않았다면 플레이어와의 거리로 무한을 반환 */
-	if (get_wall_intersection(ray, px, py, &wall_dir, &wall_x, &wall_y) == FALSE)
+	if (get_wall_intersection(vu, ray) == FALSE)
 		return (INFINITY);
-	wall_dist = l2dist(px, py, wall_x, wall_y);
+	vu->wl.wall_dist = l2dist(vu->px, vu->py, vu->wl.wall_x, vu->wl.wall_y);
 	/* 시점에 의해 어안효과가 나타나는것을 cos 함수로 보정해줌 */
-	wall_dist *= cos(theta - ray);
+	vu->wl.wall_dist *= cos(theta - ray);
 	/* 텍스쳐 적용이 된 벽을 그리기 위해 get_wall_intersection에서 구한 wall_x, wall_y,
 	wall_dir를 구조체에 저장함. */
-	vu->wl.wall_x = wall_x;
-	vu->wl.wall_y = wall_y;
-	vu->wl.wall_dir = wall_dir;
-	return (wall_dist);
+	return (vu->wl.wall_dist);
 }
 
 /**
@@ -409,7 +403,7 @@ void	render(t_view *vu)
 	while (x < SX)
 	{
 		/* 플레이어와 벽 거리를 구하기 위해 ray를 쏜다 */
-		vu->wl.wall_dist = cast_single_ray(vu, x, vu->px, vu->py, vu->theta);
+		vu->wl.wall_dist = cast_single_ray(vu, x, vu->theta);
 		/* 그 벽 거리를 바탕으로 실제 벽을 그린다. */
 		draw_textured_wall(vu, x, vu->wl.wall_dist);
 		x++;
