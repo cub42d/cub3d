@@ -134,40 +134,52 @@ int	get_wall_intersection(double ray, double px, double py, dir_t *wall_dir, dou
 	f = INFINITY;
 	g = INFINITY;
 	is_hit = FALSE;
-	/* 벽에 부딪힐때까지 반복문을 돌면서  */
+	/* 벽에 부딪힐때까지 반복문을 돌면서 연산을 수행 */
 	while (!is_hit)
 	{
 		if (delta_x != 0)
 			f = x_slope * (nx - px) + py;
 		if (delta_y != 0)
 			g = y_slope * (ny - py) + px;
+		/* ray가 부딪히는 가로, 세로 선 */
 		dist_verti = l2dist(px, py, nx, f);
 		dist_horiz = l2dist(px, py, g, ny);
+		/* 만약 세로선에 부딪히는게 더 짧으면 */
 		if (dist_verti < dist_horiz)
 		{
+			/* 부딪힌 세로선의 x를 내림하고 */
 			if (delta_x == 1)
 				mapx = (int)nx;
 			else
 				mapx = (int)nx - 1;
 			mapy = (int)f;
+			/* 부딪힌 방향을 세로선으로 설정 */
 			hit_side = VERT;
 		}
+		/* 만약 그게 아니면 - 가로선에 부딪혔다면 */
 		else
 		{
 			mapx = (int)g;
+			/* 부딪힌 가로선의 x를 내림하고 */
 			if (delta_y == 1)
 				mapy = (int)ny;
 			else
 				mapy = (int)ny - 1;
+			/* 부딪힌 방향을 가로선으로 설정 */
 			hit_side = HORIZ;
 		}
+		/* 앞서 x 혹은 y를 정수형으로 내림해준건 부딪힌 블록이 벽인지를 확인하기 위함임 */
 		cell = map_get_cell(mapx, mapy);
+		/* 부딪힌 공간이 맵 상에서 벗어난다면 반복문 탈출 */
 		if (cell < 0)
 			break ;
+		/* 부딪힌 공간이 벽이라면 */
 		if (cell == 1)
 		{
+			/* 부딪힌 방향이 세로선인 경우 */
 			if (hit_side == VERT)
 			{
+				/* ??? */
 				if (delta_x > 0)
 					*wall_dir = DIR_W;
 				else
