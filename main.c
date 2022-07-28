@@ -67,80 +67,85 @@ int	print_err(char *str)
 	return (1);
 }
 
-void	get_dda_data_1(t_view *vu, t_dda *dda, double ray)
+double	get_next_coord(int delta, double next_coord, double player_coord)
 {
+	if (delta > 0)
+		next_coord = floor(player_coord) + 1;
+	else
+	{
+		if (delta < 0)
+			next_coord = ceil(player_coord) - 1;
+		else
+			next_coord = player_coord;
+	}
+	return(next_coord);
+}
 
-	/* ray 방향으로 빛을 쏠때 x, y 축 방향으로 증가 감소를 확인함 */
+/**
+ * @brief dda ray 에 쓰일 변수의 초기화를 함
+ *
+ * @param vu 게임의 정보가 들어있는 구조체
+ * @param dda dda 계산을 위한 변수가 들어있는 구조체
+ * @param ray 플레이어로 부터 발사된 ray 한줄기 (single ray)
+ */
+void	init_dda(t_view *vu, t_dda *dda, double ray)
+{
 	dda->delta_x = num_sign(cos(ray));
 	dda->delta_y = num_sign(sin(ray));
-	/* x_slope : 빛줄기 함수 f(일차함수)의 기울기 */
-	/* 수직선인 경우 delta_x가 0이고, 이때 tan(ray)는 undefined */
 	if (dda->delta_x == 0)
 		dda->x_slope = INFINITY;
 	else
 		dda->x_slope = tan(ray);
-	/* y_slope : 빛줄기 함수의 역함수 g의 기울기 */
-	/* 수평선인 경우에도 1/tan(ray)가 undefined */
 	if (dda->delta_y == 0)
 		dda->y_slope = INFINITY;
 	else
 		dda->y_slope = 1./tan(ray);
-	/* nx, ny : 플레이어에서 출발한 빛이 도착할 x, y 좌표 (정수, 격자의 좌표) */
-	if (dda->delta_x > 0)
-		dda->nx = floor(vu->px) + 1;
-	else
-	{
-		if (dda->delta_x < 0)
-			dda->nx = ceil(vu->px) - 1;
-		else
-			dda->nx = vu->px;
-	}
-	if (dda->delta_y > 0)
-		dda->ny = floor(vu->py) + 1;
-	else
-	{
-		if (dda->delta_y < 0)
-			dda->ny = ceil(vu->py) - 1;
-		else
-			dda->ny = vu->py;
-	}
+	dda->nx = get_next_coord(dda->delta_x, dda->nx, vu->px);
+	dda->ny = get_next_coord(dda->delta_y, dda->ny, vu->py);
+	dda->f_x = INFINITY;
+	dda->g_x = INFINITY;
 }
 
+/**
+ * @brief map 블록을 읽어오기 위해 map index와 가로, 세로선에 부딪혔는지 확인하는 함수
+ *
+ * @param vu 게임의 정보가 들어있는 구조체
+ * @param dda  dda 계산을 위한 변수가 들어있는 구조체
+ */
 void	get_map_x_y(t_view *vu, t_dda *dda)
 {
 	if (dda->delta_x != 0)
 		dda->f_x = dda->x_slope * (dda->nx - vu->px) + vu->py;
 	if (dda->delta_y != 0)
 		dda->g_x = dda->y_slope * (dda->ny - vu->py) + vu->px;
-	/* ray가 부딪히는 가로, 세로 선 */
 	dda->dist_verti = l2dist(vu->px, vu->py, dda->nx, dda->f_x);
 	dda->dist_horiz = l2dist(vu->px, vu->py, dda->g_x, dda->ny);
-	/* 만약 세로선에 부딪히는게 더 짧으면 */
 	if (dda->dist_verti < dda->dist_horiz)
 	{
-		/* 부딪힌 세로선의 x를 내림하고 */
 		if (dda->delta_x == 1)
 			dda->map_x = (int)dda->nx;
 		else
 			dda->map_x = (int)(dda->nx - 1);
 		dda->map_y = (int)dda->f_x;
-		/* 부딪힌 방향을 세로선으로 설정 */
 		dda->hit_side = VERT;
 	}
-	/* 만약 그게 아니면 - 가로선에 부딪혔다면 */
 	else
 	{
 		dda->map_x = (int)dda->g_x;
-		/* 부딪힌 가로선의 x를 내림하고 */
 		if (dda->delta_y == 1)
 			dda->map_y = (int)dda->ny;
 		else
 			dda->map_y = (int)(dda->ny - 1);
-		/* 부딪힌 방향을 가로선으로 설정 */
 		dda->hit_side = HORIZ;
 	}
 }
 
+/**
+ * @brief ray가 닿은 벽의 위치와 방향을 저장하는 함수
+ *
+ * @param vu
+ * @param dda
+ */
 void	get_ray_wall_var(t_view *vu, t_dda *dda)
 {
 	/* 부딪힌 방향이 세로선인 경우 */
@@ -178,22 +183,14 @@ int	get_wall_intersection(t_view *vu, double ray)
 	int		cell;
 	int		is_hit;
 
-	/* dda 구조체 내의 변수들의 초기 설정은 init 함수로 따로 분류하는 편이 좋을듯 */
-	get_dda_data_1(vu, &dda, ray);
-	/* 빛줄기 함수 f와 그 역함수 g의 초기값은 inf로 둠 */
-	dda.f_x = INFINITY;
-	dda.g_x = INFINITY;
+	init_dda(vu, &dda, ray);
 	is_hit = FALSE;
-	/* 벽에 부딪힐때까지 반복문을 돌면서 연산을 수행 */
 	while (!is_hit)
 	{
 		get_map_x_y(vu, &dda);
-		/* 앞서 x 혹은 y를 정수형으로 내림해준건 부딪힌 블록이 벽인지를 확인하기 위함임 */
 		cell = map_get_cell(dda.map_x, dda.map_y);
-		/* 부딪힌 공간이 맵 상에서 벗어난다면 반복문 탈출 */
 		if (cell < 0)
 			break ;
-		/* 부딪힌 공간이 벽이라면 */
 		if (cell == 1)
 		{
 			get_ray_wall_var(vu, &dda);

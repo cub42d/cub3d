@@ -13,8 +13,8 @@ typedef enum { DIR_N = 0, DIR_E, DIR_W, DIR_S } dir_t;
 typedef struct s_dda
 {
 	/* data */
-	int	delta_x;
-	int	delta_y;
+	int		delta_x;
+	int		delta_y;
 	double	x_slope;
 	double	y_slope;
 	double	nx;
