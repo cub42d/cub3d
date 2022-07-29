@@ -520,6 +520,22 @@ int	key_down_event(int keycode, t_view *vu)
 	return (0);
 }
 
+int	mouse_event(t_view *vu)
+{
+	int	x;
+	int	y;
+
+	mlx_mouse_get_pos(vu->mlx_win, &x, &y);
+	if (y >= 0)
+	{
+		if (x <= (SX * 0.2))
+			rotate_player(vu, ROT_UNIT * 0.3);
+		else if (x >= (SX * 0.8))
+			rotate_player(vu, ROT_UNIT * (-0.3));
+	}
+	return (0);
+}
+
 /**
  * @brief 벽 텍스쳐를 가져오는 함수
  *
@@ -561,6 +577,7 @@ int	main(int argc, char **argv)
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);
+	mlx_loop_hook(vu.mlx, mouse_event, &vu);
 	mlx_loop(vu.mlx);
 	return (0);
 }
