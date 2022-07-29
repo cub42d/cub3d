@@ -395,6 +395,7 @@ void	render(t_view *vu)
 {
 	int	x;		/* 화면의 x - 가로 픽셀을 반복하며 작업하기 위한 인댁스 */
 
+	mlx_do_sync(vu->mlx);
 	clear_screen(vu);
 	x = 0;
 	while (x < SX)
@@ -407,6 +408,7 @@ void	render(t_view *vu)
 	}
 	/* 최종적으로 그린 픽셀들을 이미지로 윈도우에 집어넣는다. */
 	mlx_put_image_to_window(vu->mlx, vu->mlx_win, vu->img, 0, 0);
+	mlx_do_sync(vu->mlx);
 }
 
 /**
@@ -533,6 +535,7 @@ int	mouse_event(t_view *vu)
 		else if (x >= (SX * 0.8))
 			rotate_player(vu, ROT_UNIT * (-0.3));
 	}
+	mlx_do_sync(vu->mlx);
 	return (0);
 }
 
