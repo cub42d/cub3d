@@ -527,16 +527,16 @@ int	key_down_event(int keycode, t_view *vu)
  * @param img_dir 가져올 텍스쳐 이미지의 디렉토리 위치 문자열
  * @param i enum dir_t에 상응하는 인덱스 값 - while문을 위해 임시로 넣은 인자
  */
-void	define_wall_texture(t_view *vu, char *img_dir, int i)
+void	define_wall_texture(t_view *vu, char *img_dir, dir_t dir)
 {
-	vu->tex_wall[i].img_path = img_dir;
-	vu->tex_wall[i].px_wid = 64;
-	vu->tex_wall[i].px_hei = 64;
-	vu->tex_wall[i].img_ptr = mlx_xpm_file_to_image(vu->mlx, \
-	vu->tex_wall[i].img_path, &vu->tex_wall[i].px_wid, &vu->tex_wall[i].px_hei);
-	vu->tex_wall[i].texture = (int *)(mlx_get_data_addr(\
-	vu->tex_wall[i].img_ptr, &vu->tex_wall[i].tex_bpp, \
-	&vu->tex_wall[i].tex_line_len, &vu->tex_wall[i].tex_endian));
+	vu->tex_wall[dir].img_path = img_dir;
+	vu->tex_wall[dir].px_wid = 64;
+	vu->tex_wall[dir].px_hei = 64;
+	vu->tex_wall[dir].img_ptr = mlx_xpm_file_to_image(vu->mlx, \
+	vu->tex_wall[dir].img_path, &vu->tex_wall[dir].px_wid, &vu->tex_wall[dir].px_hei);
+	vu->tex_wall[dir].texture = (int *)(mlx_get_data_addr(\
+	vu->tex_wall[dir].img_ptr, &vu->tex_wall[dir].tex_bpp, \
+	&vu->tex_wall[dir].tex_line_len, &vu->tex_wall[dir].tex_endian));
 }
 
 int	main(int argc, char **argv)
@@ -552,10 +552,10 @@ int	main(int argc, char **argv)
 	vu.mlx_win = mlx_new_window(vu.mlx, SX, SY, "ray_casting tuto");
 	vu.img = mlx_new_image(vu.mlx, SX, SY);
 	vu.addr = mlx_get_data_addr(vu.img, &vu.bpp, &vu.line_len, &vu.endian);
-	define_wall_texture(&vu, "./texture/red_brick_wall.xpm", 0);
-	define_wall_texture(&vu, "./texture/grey_wall.xpm", 1);
-	define_wall_texture(&vu, "./texture/steel_wall.xpm", 2);
-	define_wall_texture(&vu, "./texture/blue_wall.xpm", 3);
+	define_wall_texture(&vu, "./texture/red_brick_wall.xpm", DIR_N);
+	define_wall_texture(&vu, "./texture/grey_wall.xpm", DIR_E);
+	define_wall_texture(&vu, "./texture/steel_wall.xpm", DIR_W);
+	define_wall_texture(&vu, "./texture/blue_wall.xpm", DIR_S);
 	vu.floor_colour = 0x333333;
 	vu.ceiling_colour = 0x777777;
 	render(&vu);
