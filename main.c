@@ -522,6 +522,7 @@ int	key_down_event(int keycode, t_view *vu)
 	return (0);
 }
 
+/*
 int	mouse_event(t_view *vu)
 {
 	int	x;
@@ -535,6 +536,42 @@ int	mouse_event(t_view *vu)
 		else if (x >= (SX * 0.8))
 			rotate_player(vu, ROT_UNIT * (-0.3));
 	}
+	mlx_do_sync(vu->mlx);
+	return (0);
+}
+*/
+
+/**
+ * @brief mouse move event 처리함수
+ *
+ * @param x 마우스의  화면상 x 좌표
+ * @param y 마우스의 화면상 y 좌표
+ * @param vu 게임의 정보가 담겨있는 구조체
+ * @return int : mlx 함수 prototype에 맞춰서 int를 반환
+ */
+int	mouse_move_event(int x, int y, t_view *vu)
+{
+	static int	prev_x = 0;
+	static int	prev_y = 0;
+	double		dist;
+
+	mlx_do_sync(vu->mlx);
+	if ((0 > prev_x && prev_x > SX) || (0 >prev_x && prev_x > SX))
+	{
+		prev_x = 0;
+		prev_y = 0;
+	}
+	mlx_mouse_get_pos(vu->mlx_win, &x, &y);
+	dist = l2dist(prev_x, prev_y, x, y);
+	if ((0 < x && x < SX) && (0 < y && y < SY))
+	{
+		if ((x - prev_x) < 0)
+			rotate_player(vu, ROT_UNIT * (dist * 0.3));
+		else if ((x - prev_x) > 0)
+			rotate_player(vu, ROT_UNIT * (dist * -0.3));
+	}
+	prev_x = x;
+	prev_y = y;
 	mlx_do_sync(vu->mlx);
 	return (0);
 }
@@ -580,7 +617,8 @@ int	main(int argc, char **argv)
 	render(&vu);
 	// move and draw;
 	mlx_hook(vu.mlx_win, 2, 0, key_down_event, &vu);
-	mlx_loop_hook(vu.mlx, mouse_event, &vu);
+	mlx_hook(vu.mlx_win, 6, 0, mouse_move_event, &vu);
+	// mlx_loop_hook(vu.mlx, mouse_event, &vu);
 	mlx_loop(vu.mlx);
 	return (0);
 }
