@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:40:16 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:11:33 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "utils.h"
 #include "macro.h"
 #include "mlx.h"
 
@@ -63,7 +64,7 @@ static int	get_wall_intersection(t_view *vu, t_map *map, double ray)
 	while (!is_hit)
 	{
 		get_map_x_y(vu, &dda);
-		cell = map_get_cell(vu, map, dda.map_x, dda.map_y);
+		cell = map_get_cell(map, dda.map_x, dda.map_y);
 		if (cell < 0)
 			break ;
 		if (cell == 1)
@@ -108,7 +109,7 @@ void	render(t_data *data)
 	{
 		data->vu->wl.wall_dist = cast_single_ray(data->vu, data->map, \
 													x, data->vu->theta);
-		draw_textured_wall(data->vu, data->map, x, data->vu->wl.wall_dist);
+		draw_textured_wall(data->vu, x, data->vu->wl.wall_dist);
 	}
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 							data->vu->img, 0, 0);

@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/30 04:51:35 by hmoon            ###   ########.fr        #
+#    Updated: 2022/07/30 05:50:07 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
 						ft_free ft_iseq ft_malloc ft_max ft_memcpy ft_memset \
 						ft_min ft_open ft_perror_exit ft_perror ft_putendl_fd \
 						ft_putstr_fd ft_strchr ft_strcmp ft_strlen ft_strutil \
-						ft_split ft_strtrim ft_isspace ft_l2dist ft_print_err \
-						ft_fov ft_deg2rad ft_iszero ft_rad2dig ft_numsign \
-						ft_atoi get_next_line)
+						ft_split ft_strtrim ft_isspace ft_l2dist \
+						ft_print_err ft_fov ft_deg2rad ft_iszero \
+						ft_rad2dig ft_numsign get_next_line)
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

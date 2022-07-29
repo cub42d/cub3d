@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:50:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:52:17 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:49:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ static double	get_next_coord(int delta, \
 	return (next_coord);
 }
 
-int	map_get_cell(t_view *vu, t_map *map, int x, int y)
+int	map_get_cell(t_map *map, int x, int y)
 {
 	if (x >= 0 && x < map->height && y >= 0 && y < map->width)
-		return (ft_atoi(map->arr[x][y]));
+	{
+		if (map->arr[x][y] >= '0' && map->arr[x][y] <= '9')
+			return ((map->arr[x][y] - '0'));
+		else
+			return (0);
+	}
 	else
 		return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:36:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:11:46 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	check_player(t_map *map, t_parse *temp)
 		map->p_pos = POS_S;
 	else if (map->arr[temp->y][temp->x] == 'N')
 		map->p_pos = POS_N;
-	map->arr[temp->y][temp->x] == '0';
+	map->arr[temp->y][temp->x] = '0';
 }
 
 static void	check_map(t_map *map, t_parse *temp)

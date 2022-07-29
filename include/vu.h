@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:32:46 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:50:05 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:10:58 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VU_H
 
 # include "parser.h"
+# include "macro.h"
 # include <math.h>
 
 typedef struct s_dda		t_dda;
@@ -89,8 +90,9 @@ struct s_view
 };
 
 void			init_vu(t_view *vu, t_map *map);
-void			put_pixel(t_view *vu, int x, int y, int color);
-int				map_get_cell(t_view *vu, t_map *map, int x, int y);
+void			draw_textured_wall(t_view *vu, int x, double wall_dist);
+int				map_get_cell(t_map *map, int x, int y);
+void			get_map_x_y(t_view *vu, t_dda *dda);
 void			get_ray_wall_var(t_view *vu, t_dda *dda);
 void			init_dda(t_view *vu, t_dda *dda, double ray);
 double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);

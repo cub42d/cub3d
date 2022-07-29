@@ -6,13 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:01:48 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 01:02:02 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:14:11 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	print_err(char *str)
+int	ft_print_err(char *str)
 {
 	printf("%s\n", str);
 	return (1);

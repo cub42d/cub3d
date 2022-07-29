@@ -1,7 +1,7 @@
-NO ./texture/bluestone.xpm
-SO ./texture/colorstone.xpm
-WE ./texture/greystone.xpm
-EA ./texture/redbrick.xpm
+NO ./texture/blue_wall.xpm
+SO ./texture/steel_wall.xpm
+WE ./texture/grey_wall.xpm
+EA ./texture/red_brick_wall.xpm
 
 
 

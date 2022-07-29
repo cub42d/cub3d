@@ -6,12 +6,14 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:40:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:49:55 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:33:25 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+#include "utils.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 static int	get_offset(double theta, int keycode, \
@@ -53,7 +55,7 @@ static int	move_player(t_data *data, int keycode)
 		return (ft_print_err("invalid key press"));
 	new_x = data->vu->p_x + delta_x;
 	new_y = data->vu->p_y + delta_y;
-	if (map_get_cell(data->vu, data->map, (int)new_x, (int)new_y) != 0)
+	if (map_get_cell(data->map, (int)new_x, (int)new_y) != 0)
 		return (ft_print_err("bump"));
 	data->vu->p_x = new_x;
 	data->vu->p_y = new_y;

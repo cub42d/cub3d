@@ -6,13 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 02:03:55 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 02:04:07 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:07:42 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	num_sign(double d)
+int	ft_numsign(double d)
 {
 	if (ft_iszero(d))
 		return (0);

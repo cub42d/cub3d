@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:39:34 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 05:50:21 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stddef.h>
 
-int				ft_atoi(const char *str);
 void			*ft_calloc(size_t size);
 void			ft_close(int fd);
 double			ft_deg2rad(double d);
@@ -33,11 +32,11 @@ int				ft_max(int a, int b);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 int				ft_min(int a, int b);
-int				num_sign(double d);
+int				ft_numsign(double d);
 int				ft_open(const char *file, int flags);
 void			ft_perror(const char *s, int errno);
 void			ft_perror_exit(const char *s, unsigned int exit_status);
-int				print_err(char *str);
+int				ft_print_err(char *str);
 void			ft_putendl_fd(const char *s, int fd);
 void			ft_putstr_fd(const char *s, int fd);
 double			ft_rad2dig(double d);
