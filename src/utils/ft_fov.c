@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_fov.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 04:50:22 by hmoon            ###   ########.fr       */
+/*   Created: 2022/07/30 01:29:25 by hmoon             #+#    #+#             */
+/*   Updated: 2022/07/30 01:32:54 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "utils.h"
+#include "macro.h"
 
-# include "parser.h"
-# include "vu.h"
-# include "macro.h"
-
-typedef struct s_data	t_data;
-
-struct s_data
+double	ft_fov_h(double fov)
 {
-	t_view			*vu;
-	t_map			*map;
-};
+	return (ft_deg2rad(fov));
+}
 
-int		key_down_event(int keycode, t_data *data);
-int		mouse_move_event(int x, int y, t_data *data);
-void	render(t_data *data);
-
-#endif
+double	ft_fov_v(double fov)
+{
+	return (ft_fov_h(fov) * ((double)SY / (double)SX));
+}

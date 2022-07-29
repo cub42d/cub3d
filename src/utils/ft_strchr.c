@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 22:19:15 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/21 04:53:56 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/29 15:17:55 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	}
 	if ((unsigned char)c == '\0')
-		return ((char *)s);
+	{
+		if (s)
+			return ((char *)s);
+	}
 	return (NULL);
 }

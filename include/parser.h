@@ -6,15 +6,16 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/23 16:14:40 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 02:25:26 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef PARSER_H
+# define PARSER_H
 
 typedef struct s_map		t_map;
 typedef struct s_parse		t_parse;
+
 struct s_map
 {
 	char	*no;
@@ -26,6 +27,9 @@ struct s_map
 	char	**arr;
 	int		width;
 	int		height;
+	double	p_x;
+	double	p_y;
+	int		p_pos;
 };
 
 struct s_parse
@@ -34,10 +38,10 @@ struct s_parse
 	char	**arr;
 	char	*str;
 	int		width;
-	int		gnl_ret;
 	int		size;
+	int		x;
+	int		y;
 };
-
 
 void	parse_main(t_map *map, char *argv);
 void	parse_texture(t_map *map, int file);

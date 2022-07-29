@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:50:59 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/22 07:16:18 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/29 15:30:30 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	parse_main(t_map *map, char *argv)
 	file = ft_open(argv, 0x0000);
 	parse_texture(map, file);
 	parse_map(map, file);
+	ft_close(file);
 }
