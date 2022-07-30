@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:40:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:33:25 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/30 17:00:04 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,10 @@ int	key_down_event(int keycode, t_data *data)
 
 int	mouse_move_event(int x, int y, t_data *data)
 {
-	int		prev_x;
-	int		prev_y;
-	double	dist;
+	static int	prev_x = 0;
+	static int	prev_y = 0;
+	double		dist;
 
-	prev_x = 0;
-	prev_y = 0;
 	mlx_do_sync(data->vu->mlx);
 	if ((0 > prev_x && prev_x > SX) || (0 > prev_x && prev_x > SX))
 	{
