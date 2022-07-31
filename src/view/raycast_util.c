@@ -6,13 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:50:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:49:28 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/31 09:28:07 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vu.h"
-#include "macro.h"
+#include "cub3d.h"
 #include "utils.h"
+#include <math.h>
 
 static double	get_next_coord(int delta, \
 								double next_coord, double player_coord)

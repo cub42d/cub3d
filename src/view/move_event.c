@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   move_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:40:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 17:00:04 by hyunkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/31 09:27:04 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "utils.h"
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 

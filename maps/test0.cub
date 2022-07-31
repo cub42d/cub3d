@@ -1,13 +1,13 @@
-NO ./texture/blue_wall.xpm
-SO ./texture/steel_wall.xpm
-WE ./texture/grey_wall.xpm
-EA ./texture/red_brick_wall.xpm
+NO ./texture/north.xpm
+SO ./texture/south.xpm
+WE ./texture/west.xpm
+EA ./texture/east.xpm
 
 
 
 
-F 176,129,18
-C 124,203,249
+F 168, 167, 94
+C 38, 71, 92
 
 
 11111111111111111111111
@@ -20,5 +20,5 @@ C 124,203,249
 10000000000000000000001
 10000000000000000000001
 10000000000000000000001
-10000000000N00000000001
+10000000000S00000000001
 11111111111111111111111

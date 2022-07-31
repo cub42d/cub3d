@@ -6,14 +6,14 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:11:33 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/31 09:29:00 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
 #include "cub3d.h"
 #include "utils.h"
-#include "macro.h"
-#include "mlx.h"
+#include <math.h>
 
 static void	put_vertical_solid_color_line(t_view *vu, \
 											int x, int color, int point)

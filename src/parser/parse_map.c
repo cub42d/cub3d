@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:11:46 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/31 09:29:14 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,5 @@ void	parse_map(t_map *map, int file)
 	}
 	check_map(map, temp);
 	ft_double_free(&(temp->arr));
-	ft_free((void *)&temp);
+	ft_free((void **)&temp);
 }

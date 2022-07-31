@@ -6,13 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:05:37 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:50:43 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/07/31 09:26:00 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vu.h"
-#include "macro.h"
+#include "cub3d.h"
 #include "utils.h"
+#include <math.h>
 
 static void	put_pixel(t_view *vu, int x, int y, int color)
 {
