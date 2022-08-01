@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/31 10:15:11 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 02:22:14 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	init_vu(t_view *vu, t_map *map)
 {
 	vu->p_x = map->p_y + 0.5;
 	vu->p_y = map->p_x + 0.5;
-	printf("%lf %lf\n", vu->p_x, vu->p_y);
 	get_player_position(vu, map);
 	vu->mlx = mlx_init();
 	if (!vu->mlx)

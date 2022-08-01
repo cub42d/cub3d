@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/31 09:40:20 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/01 21:49:27 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define _2PI				6.28318530717958647692
 # define ROT_UNIT			0.02
-# define MOVE_UNIT			0.1
+# define MOVE_UNIT			0.2
 # define EPS				(1e-06)
 
 # define W					13
