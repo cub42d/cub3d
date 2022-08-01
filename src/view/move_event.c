@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:40:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 02:21:50 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 02:25:07 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static  colision_calibration(t_map *map, double *x, double *y)
+static void	colision_calibration(t_map *map, double *x, double *y)
 {
 	double	t;
 	double	e;
