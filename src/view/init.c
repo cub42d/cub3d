@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_vu.c                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 02:22:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 17:21:27 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "cub3d.h"
 #include "utils.h"
-#include <stdio.h>
 
 static void	get_player_position(t_view *vu, t_map *map)
 {
@@ -27,7 +26,7 @@ static void	get_player_position(t_view *vu, t_map *map)
 		vu->theta = ft_deg2rad(270);
 }
 
-static void	define_wall_texture(t_view *vu, char *img_dir, t_dir dir)
+static void	define_texture(t_view *vu, char *img_dir, t_dir dir)
 {
 	vu->tex_wall[dir].img_path = img_dir;
 	vu->tex_wall[dir].img_ptr = mlx_xpm_file_to_image(vu->mlx, \
@@ -40,6 +39,21 @@ static void	define_wall_texture(t_view *vu, char *img_dir, t_dir dir)
 	vu->tex_wall[dir].texture = (int *)(mlx_get_data_addr(\
 	vu->tex_wall[dir].img_ptr, &vu->tex_wall[dir].tex_bpp, \
 	&vu->tex_wall[dir].tex_line_len, &vu->tex_wall[dir].tex_endian));
+}
+
+static void	init_texture(t_view *vu, t_map *map)
+{
+	//static const	*door_file = "./texture/door.xpm";
+	//static const	*sprite1_file = "./texture/sprite1.xpm";
+	//static const	*sprite2_file = "./texture/sprite2.xpm";
+
+	define_texture(vu, map->no, DIR_N);
+	define_texture(vu, map->ea, DIR_E);
+	define_texture(vu, map->we, DIR_W);
+	define_texture(vu, map->so, DIR_S);
+	//define_texture(vu, door_file, DOOR);
+	//define_texture(vu, sprite1_file, SPRITE_1);
+	//define_texture(vu, sprite2_file, SPRITE_2);
 }
 
 void	init_vu(t_view *vu, t_map *map)
@@ -60,8 +74,5 @@ void	init_vu(t_view *vu, t_map *map)
 		&vu->line_len, &vu->endian);
 	if (!vu->addr || vu->bpp != 32 || vu->endian != 0)
 		ft_error_exit(MLX_ERROR);
-	define_wall_texture(vu, map->no, DIR_N);
-	define_wall_texture(vu, map->ea, DIR_E);
-	define_wall_texture(vu, map->we, DIR_W);
-	define_wall_texture(vu, map->so, DIR_S);
+	init_texture(vu, map);
 }

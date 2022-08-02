@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/07/30 05:50:07 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/02 17:31:11 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,11 @@ INCLUDE				:=	./include/
 #	main srcs
 SRCS				+=	main.c
 
+#	event srcs
+SRCS				+=	$(addsuffix .c, key_down mouse move_utils)
+
 #	view srcs
-SRCS				+= $(addsuffix .c, draw_wall init_vu move_event \
-						raycast_util render)
+SRCS				+=	$(addsuffix .c, draw init raycast_util render)
 
 #	parser srcs
 SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)
@@ -42,7 +44,7 @@ SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
 						ft_putstr_fd ft_strchr ft_strcmp ft_strlen ft_strutil \
 						ft_split ft_strtrim ft_isspace ft_l2dist \
 						ft_print_err ft_fov ft_deg2rad ft_iszero \
-						ft_rad2dig ft_numsign get_next_line)
+						ft_rad2dig ft_numsign ft_exit get_next_line)
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

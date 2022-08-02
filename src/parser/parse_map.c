@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/31 09:29:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 17:27:29 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	check_map(t_map *map, t_parse *temp)
 		temp->x = 0;
 		while (temp->x < ft_strlen(temp->arr[temp->y]))
 		{
-			if (ft_strchr("02EWSN", map->arr[temp->y][temp->x]))
+			if (ft_strchr("0234EWSN", map->arr[temp->y][temp->x]))
 			{
 				if (!temp->x || !temp->y \
 					||temp->x == map->width - 1 || temp->y == map->height -1)

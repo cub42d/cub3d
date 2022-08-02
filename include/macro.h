@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/01 21:49:27 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 17:26:49 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define S					1
 # define A					0
 # define D					2
+# define E					14
+# define REDCROSS			17
 # define ESC				53
 # define LEFT				123
 # define RIGHT				124
@@ -62,7 +64,10 @@ enum e_dir
 	DIR_N = 0,
 	DIR_E,
 	DIR_W,
-	DIR_S
+	DIR_S,
+	DOOR,
+	SPRITE_1,
+	SPRITE_2
 };
 
 enum e_hit

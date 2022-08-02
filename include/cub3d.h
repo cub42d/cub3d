@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/31 09:39:04 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 17:21:09 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ struct s_draw_wall
 
 struct s_view
 {
-	t_tex		tex_wall[4];
+	t_tex		tex_wall[7];
 	t_wall		wl;
 	void		*mlx;
 	void		*mlx_win;
@@ -95,23 +95,26 @@ struct s_view
 	double		theta;
 };
 
-//				init_vu.c
-void			init_vu(t_view *vu, t_map *map);
-
-//				draw_wall.c
-void			draw_textured_wall(t_view *vu, int x, double wall_dist);
-
-//				move_event.c
+//		event
+//			key_down.c
 int				key_down_event(int keycode, t_data *data);
+//			mouse.c
 int				mouse_move_event(int x, int y, t_data *data);
+//			move_utils.c
+void			rotate_player(t_data *data, double delta);
+int				move_player(t_data *data, int keycode);
 
-//				raycast_util.c
+//		view
+//			init.c
+void			init_vu(t_view *vu, t_map *map);
+//			draw.c
+void			draw_textured_wall(t_view *vu, int x, double wall_dist);
+//			raycast_util.c
 int				map_get_cell(t_map *map, int x, int y);
 void			get_map_x_y(t_view *vu, t_dda *dda);
 void			get_ray_wall_var(t_view *vu, t_dda *dda);
 void			init_dda(t_view *vu, t_dda *dda, double ray);
-
-//				render.c
+//			render.c
 double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 void			render(t_data *data);
 

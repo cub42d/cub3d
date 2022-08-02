@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:11:20 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/01 21:59:01 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 17:43:00 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int	main(int argc, char **argv)
 	parse_main(data->map, argv[1]);
 	init_vu(data->vu, data->map);
 	render(data);
+	//mlx_mouse_hide();
 	mlx_hook(data->vu->mlx_win, 2, 0, key_down_event, &data->vu);
 	mlx_hook(data->vu->mlx_win, 6, 0, mouse_move_event, &data->vu);
+	mlx_hook(data->vu->mlx_win, REDCROSS, 0, ft_exit, &data->vu);
 	mlx_loop(data->vu->mlx);
 	return (0);
 }

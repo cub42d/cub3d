@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_event.c                                       :+:      :+:    :+:   */
+/*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 00:40:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 02:25:07 by hmoon            ###   ########.fr       */
+/*   Created: 2022/08/02 16:42:59 by hmoon             #+#    #+#             */
+/*   Updated: 2022/08/02 17:25:18 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
 #include "utils.h"
+#include "macro.h"
 #include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 static void	colision_calibration(t_map *map, double *x, double *y)
 {
@@ -25,17 +23,17 @@ static void	colision_calibration(t_map *map, double *x, double *y)
 	double	p;
 
 	if ((map_get_cell(map, (int)floor(*x) - 1, (int)*y) != 0) \
-		&& (modf(*x, &t) <= 0.1))
-		*x = t + 0.1;
+		&& (modf(*x, &t) <= 0.2))
+		*x = t + 0.2;
 	if ((map_get_cell(map, (int)ceil(*x), (int)*y) != 0) \
-		&& (modf(*x, &e) >= 0.9))
-		*x = e + 0.9;
+		&& (modf(*x, &e) >= 0.8))
+		*x = e + 0.8;
 	if ((map_get_cell(map, (int)*x, (int)floor(*y) - 1) != 0)
-		&& (modf(*y, &m) <= 0.1))
-		*y = m + 0.1;
+		&& (modf(*y, &m) <= 0.2))
+		*y = m + 0.2;
 	if ((map_get_cell(map, (int)*x, (int)ceil(*y)) != 0) \
-		&& (modf(*y, &p) >= 0.9))
-		*y = p + 0.9;
+		&& (modf(*y, &p) >= 0.8))
+		*y = p + 0.8;
 }
 
 static int	get_offset(double theta, int keycode, \
@@ -66,7 +64,7 @@ static int	get_offset(double theta, int keycode, \
 	return (0);
 }
 
-static int	move_player(t_data *data, int keycode)
+int	move_player(t_data *data, int keycode)
 {
 	double	delta_x;
 	double	delta_y;
@@ -86,7 +84,7 @@ static int	move_player(t_data *data, int keycode)
 	return (0);
 }
 
-static void	rotate_player(t_data *data, double delta)
+void	rotate_player(t_data *data, double delta)
 {
 	data->vu->theta += delta;
 	if (data->vu->theta < 0)
@@ -94,52 +92,4 @@ static void	rotate_player(t_data *data, double delta)
 	else if (data->vu->theta > _2PI)
 		data->vu->theta -= _2PI;
 	render(data);
-}
-
-int	key_down_event(int keycode, t_data *data)
-{
-	if (keycode == W || keycode == A || keycode == S || keycode == D)
-	{
-		move_player(data, keycode);
-	}
-	else if (keycode == LEFT || keycode == RIGHT)
-	{
-		if (keycode == LEFT)
-			rotate_player(data, ROT_UNIT * 1.2);
-		else
-			rotate_player(data, ROT_UNIT * (-1.2));
-	}
-	else if (keycode == ESC)
-	{
-		printf("Exit\n");
-		exit(0);
-	}
-	return (0);
-}
-
-int	mouse_move_event(int x, int y, t_data *data)
-{
-	static int	prev_x = 0;
-	static int	prev_y = 0;
-	double		dist;
-
-	mlx_do_sync(data->vu->mlx);
-	if ((0 > prev_x && prev_x > SX) || (0 > prev_x && prev_x > SX))
-	{
-		prev_x = 0;
-		prev_y = 0;
-	}
-	mlx_mouse_get_pos(data->vu->mlx_win, &x, &y);
-	dist = ft_l2dist(prev_x, prev_y, x, y);
-	if ((0 < x && x < SX) && (0 < y && y < SY))
-	{
-		if ((x - prev_x) < 0)
-			rotate_player(data, ROT_UNIT * (dist * 0.3));
-		else if ((x - prev_x) > 0)
-			rotate_player(data, ROT_UNIT * (dist * -0.3));
-	}
-	prev_x = x;
-	prev_y = y;
-	mlx_do_sync(data->vu->mlx);
-	return (0);
 }

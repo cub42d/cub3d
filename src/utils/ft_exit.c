@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:18:28 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/08/02 16:38:14 by hmoon             #+#    #+#             */
+/*   Updated: 2022/08/02 17:44:00 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "utils.h"
+#include "mlx.h"
+#include <stdlib.h>
 
-void	*ft_calloc(size_t size)
+int	ft_exit(t_view *vu)
 {
-	void			*p;
-
-	p = ft_malloc(sizeof(size_t) * size);
-	ft_memset(p, 0x00, size);
-	return (p);
+	(void)vu;
+	ft_putendl_fd("EXIT", 1);
+	exit(0);
+	return (0);
 }
