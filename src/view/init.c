@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:27 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:36:34 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,25 @@ static void	init_texture(t_view *vu, t_map *map)
 	//define_texture(vu, sprite2_file, SPRITE_2);
 }
 
+static void	init_visible(t_view *vu, t_map *map)
+{
+	int	i;
+	int	j;
+
+	vu->visible = ft_calloc(sizeof(int *) * (map->height));
+	i = 0;
+	while (i < map->height)
+	{
+		vu->visible[i] = ft_calloc(sizeof(int) * (map->width));
+		while (j < map->width)
+		{
+			vu->visible[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	init_vu(t_view *vu, t_map *map)
 {
 	vu->p_x = map->p_y + 0.5;
@@ -75,4 +94,5 @@ void	init_vu(t_view *vu, t_map *map)
 	if (!vu->addr || vu->bpp != 32 || vu->endian != 0)
 		ft_error_exit(MLX_ERROR);
 	init_texture(vu, map);
+	init_visible(vu, map);
 }

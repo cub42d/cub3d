@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:15:48 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:37:56 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	get_wall_intersection(t_view *vu, t_map *map, double ray)
 			is_hit = TRUE;
 			break ;
 		}
+		vu->visible[dda.map_x][dda.map_y] = 1;
 		if (dda.hit_side == VERT)
 			dda.nx += dda.delta_x;
 		else
@@ -95,6 +96,7 @@ double	cast_single_ray(t_view *vu, t_map *map, int x, double theta)
 	vu->wl.wall_dist = ft_l2dist(vu->p_x, vu->p_y, \
 	vu->wl.wall_x, vu->wl.wall_y);
 	vu->wl.wall_dist *= cos(theta - ray);
+	vu->z_buf[x] = vu->wl.wall_dist;
 	return (vu->wl.wall_dist);
 }
 

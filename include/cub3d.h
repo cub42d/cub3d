@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:09 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:28:11 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "parser.h"
 # include "macro.h"
+# include "sprite.h"
 
 typedef struct s_data		t_data;
 typedef struct s_dda		t_dda;
@@ -93,6 +94,8 @@ struct s_view
 	double		p_x;
 	double		p_y;
 	double		theta;
+	int			**visible;
+	double		z_buf[SX];
 };
 
 //		event
