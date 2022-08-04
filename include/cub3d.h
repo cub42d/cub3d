@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:09 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 02:05:44 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,22 @@ typedef struct s_tex		t_tex;
 typedef struct s_wall		t_wall;
 typedef struct s_view		t_view;
 typedef struct s_draw_wall	t_draw_wall;
+typedef struct s_minimap	t_minimap;
 
 struct s_data
 {
 	t_view		*vu;
 	t_map		*map;
+	t_minimap	*minimap;
+};
+
+struct s_minimap
+{
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 };
 
 struct s_dda
@@ -117,5 +128,10 @@ void			init_dda(t_view *vu, t_dda *dda, double ray);
 //			render.c
 double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 void			render(t_data *data);
+
+int				clear_all(t_view *vu);
+
+void			init_minimap(t_data *data);
+void			render_map(t_data *data);
 
 #endif

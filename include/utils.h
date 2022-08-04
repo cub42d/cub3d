@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 18:08:25 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 01:42:46 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			*ft_calloc(size_t size);
 void			ft_close(int fd);
 double			ft_deg2rad(double d);
 void			ft_error_exit(char *s);
-int				ft_exit(t_view *vu);
+void			ft_exit(char *s);
 double			ft_fov_v(double fov);
 double			ft_fov_h(double fov);
 void			ft_free(void **ptr);

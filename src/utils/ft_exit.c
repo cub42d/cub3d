@@ -5,20 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 16:38:14 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 18:08:16 by hmoon            ###   ########.fr       */
+/*   Created: 2022/08/05 00:32:17 by hmoon             #+#    #+#             */
+/*   Updated: 2022/08/05 01:42:39 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "utils.h"
-#include "mlx.h"
 #include <stdlib.h>
 
-int	ft_exit(t_view *vu)
+void	ft_exit(char *s)
 {
-	mlx_destroy_window(vu->mlx, vu->mlx_win);
-	ft_putendl_fd("EXIT", 1);
+	ft_putendl_fd(s, 1);
 	exit(0);
-	return (0);
 }

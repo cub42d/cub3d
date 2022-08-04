@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/02 18:12:17 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/05 01:39:04 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRCS				+=	$(addsuffix .c, draw init raycast_util render)
 
 #	parser srcs
 SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)
+
+#	minimap srcs
+SRCS				+=	$(addsuffix .c, set_minimap)
 
 #	utils srcs
 SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
