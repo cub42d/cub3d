@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 12:55:36 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 17:24:18 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ struct s_draw_wall
 
 struct s_view
 {
-	t_tex		tex_wall[4];
+	t_tex		tex_wall[5];
 	t_wall		wl;
 	void		*mlx;
 	void		*mlx_win;
@@ -104,6 +104,7 @@ struct s_view
 	double		p_x;
 	double		p_y;
 	double		theta;
+	int			is_door;
 };
 
 //		event

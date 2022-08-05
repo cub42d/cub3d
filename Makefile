@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/05 09:58:14 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/05 17:17:05 by hyunkkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ $(LIBMLX)			:
 
 .PHONY				:	clean
 clean				:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS_DIR)
 
 .PHONY				:	fclean
 fclean				:

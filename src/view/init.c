@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:37:23 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 17:19:34 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	init_texture(t_view *vu, t_map *map)
 	define_texture(vu, map->ea, DIR_E);
 	define_texture(vu, map->we, DIR_W);
 	define_texture(vu, map->so, DIR_S);
+	define_texture(vu, DOOR_XPM, DOOR);
 }
 
 void	init_vu(t_view *vu, t_map *map)

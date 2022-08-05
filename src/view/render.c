@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 12:56:30 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 17:31:56 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,18 @@ static int	get_wall_intersection(t_view *vu, t_map *map, double ray)
 		cell = map_get_cell(map, dda.map_x, dda.map_y);
 		if (cell < 0)
 			break ;
-		if (cell == 1)
+		if (cell == 1 || cell == 2)
 		{
 			get_ray_wall_var(vu, &dda);
 			is_hit = TRUE;
+			/*
+				문인지 아닌지에 대한 정보를 vu에 저장하게 만들었습니다.
+				vu에다 임시로 저장했기 때문에 나중에 수정하셔도 됩니다!!!!
+			 */
+			if (cell == 2)
+				vu->is_door = TRUE;
+			else
+				vu->is_door = FALSE;
 			break ;
 		}
 		if (dda.hit_side == VERT)

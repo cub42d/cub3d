@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:05:37 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 16:36:05 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 17:31:54 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	draw_textured_wall(t_view *vu, int x, double wall_dist)
 	else
 		temp->texture_ratio = vu->wl.wall_x - floor(vu->wl.wall_x);
 	wall_texture = &vu->tex_wall[vu->wl.wall_dir];
+	/* dir에 따라서 비율 처리는 하게 만들되, 문이면 텍스쳐만 변경해줬습니다! */
+	if (vu->is_door == TRUE)
+		wall_texture = &vu->tex_wall[DOOR];
 	temp->tx = (int)(temp->texture_ratio * wall_texture->px_wid);
 	temp->wall_height = get_wall_height(wall_dist);
 	temp->y0 = (int)((SY - temp->wall_height) / 2.0);
