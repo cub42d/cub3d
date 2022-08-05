@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 09:59:34 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:01:10 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define FALSE				0
 # define TRUE				1
 
-# define MINI_SCALE			0.4
+# define MINI_SCALE			0.5
 # define TILE_SIZE			20
 # define PIXEL_SIZE			10
 
