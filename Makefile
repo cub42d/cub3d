@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/02 18:12:17 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/05 19:02:43 by hyunkkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS				+=	main.c
 SRCS				+=	$(addsuffix .c, key_down mouse move_utils)
 
 #	view srcs
-SRCS				+=	$(addsuffix .c, draw init raycast_util render)
+SRCS				+=	$(addsuffix .c, draw init raycast_util render sprite)
 
 #	parser srcs
 SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)
@@ -69,7 +69,7 @@ $(LIBMLX)			:
 
 .PHONY				:	clean
 clean				:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS_DIR)
 
 .PHONY				:	fclean
 fclean				:

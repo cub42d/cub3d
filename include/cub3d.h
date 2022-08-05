@@ -6,7 +6,7 @@
 /*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/03 20:28:11 by hyunkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/05 20:51:21 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "parser.h"
 # include "macro.h"
-# include "sprite.h"
 
 typedef struct s_data		t_data;
 typedef struct s_dda		t_dda;
@@ -23,6 +22,8 @@ typedef struct s_tex		t_tex;
 typedef struct s_wall		t_wall;
 typedef struct s_view		t_view;
 typedef struct s_draw_wall	t_draw_wall;
+typedef struct s_sprite		t_sprite;
+
 
 struct s_data
 {
@@ -82,7 +83,7 @@ struct s_draw_wall
 
 struct s_view
 {
-	t_tex		tex_wall[7];
+	t_tex		tex_wall[6];
 	t_wall		wl;
 	void		*mlx;
 	void		*mlx_win;
@@ -96,6 +97,16 @@ struct s_view
 	double		theta;
 	int			**visible;
 	double		z_buf[SX];
+	int			pcnt;
+};
+
+struct s_sprite
+{
+	t_tex	tex;
+	int		x;
+	int		y;
+	double	dist;
+	double	theta;
 };
 
 //		event
@@ -112,6 +123,10 @@ int				move_player(t_data *data, int keycode);
 void			init_vu(t_view *vu, t_map *map);
 //			draw.c
 void			draw_textured_wall(t_view *vu, int x, double wall_dist);
+int				get_wall_height(double dist);
+void			put_pixel(t_view *vu, int x, int y, int color);
+int				get_wall_texture(t_tex *tex, int tx, int ty);
+
 //			raycast_util.c
 int				map_get_cell(t_map *map, int x, int y);
 void			get_map_x_y(t_view *vu, t_dda *dda);
@@ -120,5 +135,6 @@ void			init_dda(t_view *vu, t_dda *dda, double ray);
 //			render.c
 double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 void			render(t_data *data);
-
+//			sprite.c
+void			draw_sprite(t_view *vu, t_map *map);
 #endif

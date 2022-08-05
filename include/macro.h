@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:26:49 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 20:20:24 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ enum e_dir
 	DIR_S,
 	DOOR,
 	SPRITE_1,
-	SPRITE_2
+	// SPRITE_2
 };
 
 enum e_hit

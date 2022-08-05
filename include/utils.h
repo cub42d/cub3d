@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 18:08:25 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 20:55:31 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "cub3d.h"
 # include <stddef.h>
 
 void			*ft_calloc(size_t size);

@@ -6,7 +6,7 @@
 /*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/03 20:37:56 by hyunkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/05 21:30:16 by hyunkkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "cub3d.h"
 #include "utils.h"
 #include <math.h>
+#include <stdio.h>
 
 static void	put_vertical_solid_color_line(t_view *vu, \
 											int x, int color, int point)
@@ -73,7 +74,8 @@ static int	get_wall_intersection(t_view *vu, t_map *map, double ray)
 			is_hit = TRUE;
 			break ;
 		}
-		vu->visible[dda.map_x][dda.map_y] = 1;
+		if (cell == 4)
+			vu->visible[dda.map_x][dda.map_y] = 1;
 		if (dda.hit_side == VERT)
 			dda.nx += dda.delta_x;
 		else
@@ -113,6 +115,7 @@ void	render(t_data *data)
 													x, data->vu->theta);
 		draw_textured_wall(data->vu, x, data->vu->wl.wall_dist);
 	}
+	draw_sprite(data->vu, data->map);
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 							data->vu->img, 0, 0);
 	mlx_do_sync(data->vu->mlx);
