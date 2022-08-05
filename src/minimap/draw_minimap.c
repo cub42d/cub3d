@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 06:51:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 09:45:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 09:58:57 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	render_map(t_data *data)
 			}
 		}
 	}
-	draw_mini_ray(data);
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 	data->minimap->img, 0, 0);
 }
