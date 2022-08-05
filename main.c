@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:11:20 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 01:59:16 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:13:07 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static void	init_data(t_data *data)
 	data->vu = ft_calloc(sizeof(t_view));
 }
 
-int	clear_all(t_view *vu)
+int	clear_all(t_data *data)
 {
-	mlx_destroy_window(vu->mlx, vu->mlx_win);
+	mlx_destroy_image(data->vu->mlx, data->vu->img);
+	mlx_destroy_image(data->vu->mlx, data->minimap->img);
+	mlx_destroy_window(data->vu->mlx, data->vu->mlx_win);
 	ft_exit("EXIT");
 	return (0);
 }
@@ -43,7 +45,7 @@ int	main(int argc, char **argv)
 	//mlx_mouse_hide();
 	mlx_hook(data->vu->mlx_win, 2, 0, key_down_event, data);
 	mlx_hook(data->vu->mlx_win, 6, 0, mouse_move_event, data);
-	mlx_hook(data->vu->mlx_win, REDCROSS, 0, clear_all, data->vu);
+	mlx_hook(data->vu->mlx_win, REDCROSS, 0, clear_all, data);
 	mlx_loop(data->vu->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 09:58:07 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:12:17 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 void			render(t_data *data);
 
 //			main.c
-int				clear_all(t_view *vu);
+int				clear_all(t_data *data);
 
 //		minimap
 //			init_minimap.c
