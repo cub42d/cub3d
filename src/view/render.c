@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 04:53:51 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 09:40:48 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void	render(t_data *data)
 													x, data->vu->theta);
 		draw_textured_wall(data->vu, x, data->vu->wl.wall_dist);
 	}
-
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 							data->vu->img, 0, 0);
 	render_map(data);
+	//draw_player(data);
 	mlx_do_sync(data->vu->mlx);
 }

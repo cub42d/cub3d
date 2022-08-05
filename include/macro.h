@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 04:53:31 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 09:56:20 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@
 # define TRUE				1
 
 # define MINI_SCALE			0.5
-# define TILE_SIZE			20
+# define TILE_SIZE			30
+# define PIXEL_SIZE			15
 
 
 typedef enum e_dir			t_dir;
