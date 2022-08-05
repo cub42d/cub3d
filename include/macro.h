@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:43:45 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 12:55:29 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define MINI_SCALE			0.5
 # define TILE_SIZE			20
 # define PIXEL_SIZE			10
+# define DOOR_XPM			"./texture/door.xpm"
 
 typedef enum e_dir			t_dir;
 
@@ -68,10 +69,8 @@ enum e_dir
 	DIR_N = 0,
 	DIR_E,
 	DIR_W,
-	DIR_S,
-	DOOR,
-	SPRITE_1,
-	SPRITE_2
+	DIR_S
+	//DOOR
 };
 
 enum e_hit

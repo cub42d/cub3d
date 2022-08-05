@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:38:06 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 12:55:36 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_wall		t_wall;
 typedef struct s_view		t_view;
 typedef struct s_draw_wall	t_draw_wall;
 typedef struct s_minimap	t_minimap;
-typedef struct s_offset		t_offset;
 
 struct s_data
 {
