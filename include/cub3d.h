@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:12:17 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:38:06 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ struct s_data
 	t_view		*vu;
 	t_map		*map;
 	t_minimap	*minimap;
-};
-
-struct s_offset
-{
-	double		x;
-	double		y;
 };
 
 struct s_minimap
@@ -99,7 +93,7 @@ struct s_draw_wall
 
 struct s_view
 {
-	t_tex		tex_wall[7];
+	t_tex		tex_wall[4];
 	t_wall		wl;
 	void		*mlx;
 	void		*mlx_win;
