@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/08 14:30:17 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/08 16:02:26 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS				+=	main.c
 SRCS				+=	$(addsuffix .c, key_down mouse move_utils)
 
 #	view srcs
-SRCS				+=	$(addsuffix .c, draw init raycast_util render)
+SRCS				+=	$(addsuffix .c, draw init raycast_util render \
+						raycast)
 
 #	parser srcs
 SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:33:07 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 15:41:53 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:17:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,21 @@
 #include "utils.h"
 #include <math.h>
 
-static int	get_door_intersection(t_view *vu, t_map *map, t_dda *dda, double ray)
+static int	map_get_door(t_map *map, int x, int y)
+{
+	if (x >= 0 && x < map->height && y >= 0 && y < map->width)
+	{
+		if (map->arr[x][y] >= '0' && map->arr[x][y] <= '3')
+			return ((map->arr[x][y] - '0'));
+		else
+			return (0);
+	}
+	else
+		return (-1);
+}
+
+static int	get_door_intersection(t_view *vu, t_map *map, \
+									t_dda *dda, double ray)
 {
 	int		cell;
 	int		is_hit;
@@ -25,9 +39,9 @@ static int	get_door_intersection(t_view *vu, t_map *map, t_dda *dda, double ray)
 	while (!is_hit)
 	{
 		get_map_x_y(vu, dda);
-		cell = map_get_cell(map, dda->map_x, dda->map_y);
+		cell = map_get_door(map, dda->map_x, dda->map_y);
 		if (cell < 0)
-			break;
+			break ;
 		if (cell == 2 || cell == 3)
 		{
 			get_ray_wall_var(vu, dda);
@@ -49,7 +63,7 @@ static double	singleray_to_dist(t_view *vu, t_map *map, t_dda *dda)
 
 	angle_per_pixel = ft_deg2rad(FOV) / (SX - 1.);
 	fovh_2 = ft_deg2rad(FOV) / 2.0;
-	ray = (vu->theta + fovh_2) - ((int)(SX / 2) * angle_per_pixel);
+	ray = (vu->theta + fovh_2) - ((int)(SX / 2) *angle_per_pixel);
 	if (get_door_intersection(vu, map, dda, ray) == TRUE)
 	{
 		vu->wl.wall_dist = ft_l2dist(vu->p_x, vu->p_y, \

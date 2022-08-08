@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 14:29:50 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:02:37 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,9 @@ void			get_map_x_y(t_view *vu, t_dda *dda);
 void			get_ray_wall_var(t_view *vu, t_dda *dda);
 void			init_dda(t_view *vu, t_dda *dda, double ray);
 //			render.c
-double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 void			render(t_data *data);
+//			raycast.c
+double			cast_single_ray(t_view *vu, t_map *map, int x, double theta);
 
 //			main.c
 int				clear_all(t_data *data);

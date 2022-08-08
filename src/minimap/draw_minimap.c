@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 06:51:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:41:41 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:07:21 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ static void	fill_squares(t_data *data, int x, int y, int color)
 	}
 }
 
+static void	set_color(t_data *data, int row, int col)
+{
+	if (data->map->arr[row][col] == '1')
+		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
+		((int)(PIXEL_SIZE) *row), 0x345433);
+	else if (data->map->arr[row][col] == '0')
+		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
+		((int)(PIXEL_SIZE) *row), 0xffffff);
+	else if (data->map->arr[row][col] == '2')
+		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
+		((int)(PIXEL_SIZE) *row), 0x934233);
+	else if (data->map->arr[row][col] == '3')
+		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
+		((int)(PIXEL_SIZE) *row), 0x934233);
+}
+
 void	render_map(t_data *data)
 {
 	int	col;
@@ -46,14 +62,7 @@ void	render_map(t_data *data)
 		while (++col < data->map->width)
 		{
 			if (col < (int)(MINI_SCALE * SX / (int)(PIXEL_SIZE)))
-			{
-				if (data->map->arr[row][col] == '1')
-					fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-					((int)(PIXEL_SIZE) *row), 0x345433);
-				else if (data->map->arr[row][col] == '0')
-					fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-					((int)(PIXEL_SIZE) *row), 0xffffff);
-			}
+				set_color(data, row, col);
 		}
 	}
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
