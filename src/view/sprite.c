@@ -64,12 +64,12 @@ t_sprite	*get_visible_sprites(t_view *vu, t_map *map)
 		x++;
 	}
 	vu->pcnt = n;
+	// printf("num of sprite : %d\n", n);
 	return (sprite);
 }
 
 void	draw_sprite(t_view *vu, t_map *map)
 {
-	int			nsp;
 	t_sprite	*sprite;
 	int			i;
 	int			sprite_height;
@@ -80,13 +80,12 @@ void	draw_sprite(t_view *vu, t_map *map)
 	int			x_max;
 	int			x;
 
-	nsp = 0;
 	sprite = get_visible_sprites(vu, map);
 	fov_h = ft_deg2rad(FOV);
 	/* 일단 stdlib에 있는 qsort를 쓰겠습니다;; */
-	qsort(sprite, nsp, sizeof(t_sprite), compare_sprites);
+	qsort(sprite, vu->pcnt, sizeof(t_sprite), compare_sprites);
 	i = 0;
-	while (i < nsp)
+	while (i < vu->pcnt)
 	{
 		sprite_height = get_wall_height(sprite[i].dist);
 		angle = sprite[i].theta - vu->theta;
@@ -119,13 +118,14 @@ void	draw_sprite(t_view *vu, t_map *map)
 				texture_y = (int)((double)(y - y0) * sprite[i].tex.px_hei / sprite_height);
 				int	color;
 				color = get_wall_texture(&sprite[i].tex, texture_x, texture_y);
-				put_pixel(vu, x, y, color);
+				if (color >= 0)
+					put_pixel(vu, x, y, color);
 				y++;
 			}
 			x++;
 		}
 		i++;
 	}
-	if (nsp > 0)
+	if (vu->pcnt > 0)
 		free(sprite);
 }
