@@ -6,14 +6,14 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:01:48 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 05:14:11 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 15:37:44 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "utils.h"
 
 int	ft_print_err(char *str)
 {
-	printf("%s\n", str);
+	ft_putendl_fd(str, 1);
 	return (1);
 }

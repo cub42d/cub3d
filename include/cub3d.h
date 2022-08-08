@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 17:24:18 by hyunkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 14:29:50 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,9 @@ void			init_minimap(t_data *data);
 void			render_map(t_data *data);
 //			draw_player.c
 void			draw_player(t_data *data);
+
+//		door
+//			door_evnet.c
+void			is_door(t_data *data);
 
 #endif

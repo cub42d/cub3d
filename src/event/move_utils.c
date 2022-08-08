@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:42:59 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/02 17:25:18 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 15:41:47 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "utils.h"
 #include "macro.h"
 #include <math.h>
+#include <stdio.h>
 
 static void	colision_calibration(t_map *map, double *x, double *y)
 {
@@ -75,7 +76,8 @@ int	move_player(t_data *data, int keycode)
 		return (ft_print_err("invalid key press"));
 	new_x = data->vu->p_x + delta_x;
 	new_y = data->vu->p_y + delta_y;
-	if (map_get_cell(data->map, new_x, new_y) != 0)
+	// 아마도 이쪽에서...?
+	if (map_get_cell(data->map, new_x, new_y) == 1 || map_get_cell(data->map, new_x, new_y) == 2)
 		return (ft_print_err("bump"));
 	colision_calibration(data->map, &new_x, &new_y);
 	data->vu->p_x = new_x;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/05 17:17:05 by hyunkkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/08 14:30:17 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)
 
 #	minimap srcs
 SRCS				+=	$(addsuffix .c, init_minimap draw_minimap draw_player)
+
+#	door	srcs
+SRCS				+=	$(addsuffix .c, door_event)
 
 #	utils srcs
 SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
