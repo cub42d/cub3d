@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:33:07 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:17:28 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 17:28:25 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static double	singleray_to_dist(t_view *vu, t_map *map, t_dda *dda)
 
 	angle_per_pixel = ft_deg2rad(FOV) / (SX - 1.);
 	fovh_2 = ft_deg2rad(FOV) / 2.0;
-	ray = (vu->theta + fovh_2) - ((int)(SX / 2) *angle_per_pixel);
+	ray = (vu->theta + fovh_2) - (angle_per_pixel * (int)(SX / 2));
 	if (get_door_intersection(vu, map, dda, ray) == TRUE)
 	{
 		vu->wl.wall_dist = ft_l2dist(vu->p_x, vu->p_y, \

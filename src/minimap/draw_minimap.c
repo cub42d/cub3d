@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 06:51:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:07:21 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/08 17:29:41 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	fill_squares(t_data *data, int x, int y, int color)
 		j = -1;
 		while (++j < (int)(PIXEL_SIZE))
 		{
-			data->minimap->addr[((int)(MINI_SCALE * SX) \
-			*(y + i)) + (x + j)] = color;
+			data->minimap->addr[((y + i) * (int)(MINI_SCALE * SX)) \
+			+ (x + j)] = color;
 		}
 	}
 }
