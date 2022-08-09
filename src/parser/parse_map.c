@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:15:17 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:02:45 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 19:32:46 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	check_map(t_map *map, t_parse *temp)
 					ft_error_exit(MAP_ERROR);
 				else if (ft_strchr("EWSN", map->arr[temp->y][temp->x]))
 					check_player(map, temp);
+				if (map->arr[temp->y][temp->x] == '4')
+					map->sprite_cnt += 1;
 			}
 			else if (map->arr[temp->y][temp->x] == ' ')
 				check_grid(map, temp->x, temp->y);

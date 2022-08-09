@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/08 16:02:26 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/09 21:14:24 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,11 @@ SRCS				+=	$(addsuffix .c, parse_main parse_texture parse_map)
 #	minimap srcs
 SRCS				+=	$(addsuffix .c, init_minimap draw_minimap draw_player)
 
-#	door	srcs
+#	door srcs
 SRCS				+=	$(addsuffix .c, door_event)
+
+#	sprite srcs
+SRCS				+=	$(addsuffix .c, init_sprite)
 
 #	utils srcs
 SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
@@ -51,7 +54,8 @@ SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \
 						ft_putstr_fd ft_strchr ft_strcmp ft_strlen ft_strutil \
 						ft_split ft_strtrim ft_isspace ft_l2dist \
 						ft_print_err ft_fov ft_deg2rad ft_iszero \
-						ft_rad2dig ft_numsign ft_exit get_next_line)
+						ft_rad2dig ft_numsign ft_exit ft_colision_angle \
+						get_next_line)
 
 OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

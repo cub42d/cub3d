@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:02:37 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 22:10:30 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_wall		t_wall;
 typedef struct s_view		t_view;
 typedef struct s_draw_wall	t_draw_wall;
 typedef struct s_minimap	t_minimap;
+typedef struct s_sprite		t_sprite;
 
 struct s_data
 {
@@ -90,10 +91,21 @@ struct s_draw_wall
 	int			color;
 };
 
+struct s_sprite
+{
+	int			x;
+	int			y;
+	int			sh;
+	double		theta;
+	double		dist;
+};
+
 struct s_view
 {
-	t_tex		tex_wall[5];
+	t_tex		tex_wall[6];
+	t_sprite	*sprite;
 	t_wall		wl;
+	char		**visible;
 	void		*mlx;
 	void		*mlx_win;
 	void		*img;
@@ -104,7 +116,9 @@ struct s_view
 	double		p_x;
 	double		p_y;
 	double		theta;
+	double		fov_h;
 	int			is_door;
+	double		zbuf[SX];
 };
 
 //		event
@@ -121,6 +135,9 @@ int				move_player(t_data *data, int keycode);
 void			init_vu(t_view *vu, t_map *map);
 //			draw.c
 void			draw_textured_wall(t_view *vu, int x, double wall_dist);
+int				get_wall_height(double dist);
+int				get_wall_texture(t_tex *tex, int tx, int ty);
+void			put_pixel(t_view *vu, int x, int y, int color);
 //			raycast_util.c
 int				map_get_cell(t_map *map, int x, int y);
 void			get_map_x_y(t_view *vu, t_dda *dda);
@@ -145,5 +162,10 @@ void			draw_player(t_data *data);
 //		door
 //			door_evnet.c
 void			is_door(t_data *data);
+
+//		sprite
+//			init_sprite.c
+void			init_sprite(t_view *vu, t_map *map);
+void			draw_sprite(t_view *vu, t_map *map);
 
 #endif

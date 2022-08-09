@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 06:51:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 17:29:41 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 22:01:37 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ static void	set_color(t_data *data, int row, int col)
 	else if (data->map->arr[row][col] == '3')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
 		((int)(PIXEL_SIZE) *row), 0x934233);
+	else if (data->map->arr[row][col] == '4')
+		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
+		((int)(PIXEL_SIZE) *row), 0x534533);
 }
 
 void	render_map(t_data *data)

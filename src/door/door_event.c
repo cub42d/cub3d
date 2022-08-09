@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:33:07 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 17:28:25 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 21:55:38 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	map_get_door(t_map *map, int x, int y)
 {
 	if (x >= 0 && x < map->height && y >= 0 && y < map->width)
 	{
-		if (map->arr[x][y] >= '0' && map->arr[x][y] <= '3')
+		if (map->arr[x][y] >= '0' && map->arr[x][y] <= '4')
 			return ((map->arr[x][y] - '0'));
 		else
 			return (0);

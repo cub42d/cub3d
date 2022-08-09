@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:58:52 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:02:02 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 22:11:10 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	render(t_data *data)
 													x, data->vu->theta);
 		draw_textured_wall(data->vu, x, data->vu->wl.wall_dist);
 	}
+	draw_sprite(data->vu, data->map);
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 							data->vu->img, 0, 0);
 	render_map(data);

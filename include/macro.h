@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunkkim <hyunkkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 17:19:00 by hyunkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/09 21:51:38 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define TILE_SIZE			20
 # define PIXEL_SIZE			10
 # define DOOR_XPM			"./texture/door.xpm"
+# define SPRITE_XPM1		"./texture/sprite1.xpm"
 
 typedef enum e_dir			t_dir;
 
@@ -70,7 +71,9 @@ enum e_dir
 	DIR_E,
 	DIR_W,
 	DIR_S,
-	DOOR
+	DOOR,
+	SPRITE1,
+	SPRITE2
 };
 
 enum e_hit

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 22:32:26 by hmoon             #+#    #+#             */
-/*   Updated: 2022/07/30 02:25:26 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 19:21:07 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ struct s_map
 	double	p_x;
 	double	p_y;
 	int		p_pos;
+	int		sprite_cnt;
 };
 
 struct s_parse

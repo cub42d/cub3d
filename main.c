@@ -6,14 +6,13 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:11:20 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:38:17 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 20:10:08 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "utils.h"
 #include "mlx.h"
-#include <stdio.h>
 
 static void	init_data(t_data *data)
 {

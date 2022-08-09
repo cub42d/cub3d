@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:05:37 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/08 16:12:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 21:33:12 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 #include <math.h>
 
-static void	put_pixel(t_view *vu, int x, int y, int color)
+void	put_pixel(t_view *vu, int x, int y, int color)
 {
 	char	*dst;
 
@@ -22,7 +22,7 @@ static void	put_pixel(t_view *vu, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static int	get_wall_height(double dist)
+int	get_wall_height(double dist)
 {
 	double	fov_h;
 
@@ -30,7 +30,7 @@ static int	get_wall_height(double dist)
 	return ((int)(SY * (WALL_H / fov_h)));
 }
 
-static int	get_wall_texture(t_tex *tex, int tx, int ty)
+int	get_wall_texture(t_tex *tex, int tx, int ty)
 {
 	int	ret;
 

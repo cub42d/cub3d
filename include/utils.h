@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:34:25 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 01:42:46 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 21:14:07 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void			*ft_calloc(size_t size);
 void			ft_close(int fd);
+void			ft_colision_angle(double *angle);
 double			ft_deg2rad(double d);
 void			ft_error_exit(char *s);
 void			ft_exit(char *s);
