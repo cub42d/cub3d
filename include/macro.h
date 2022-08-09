@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 21:51:38 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/09 22:58:14 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define PIXEL_SIZE			10
 # define DOOR_XPM			"./texture/door.xpm"
 # define SPRITE_XPM1		"./texture/sprite1.xpm"
+# define SPRITE_XPM2		"./texture/sprite2.xpm"
 
 typedef enum e_dir			t_dir;
 

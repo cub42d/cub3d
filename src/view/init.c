@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 21:59:47 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 00:56:22 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	get_player_position(t_view *vu, t_map *map)
 		vu->theta = ft_deg2rad(270);
 }
 
-static void	define_texture(t_view *vu, char *img_dir, t_dir dir)
+void	define_texture(t_view *vu, char *img_dir, t_dir dir)
 {
 	vu->tex_wall[dir].img_path = img_dir;
 	vu->tex_wall[dir].img_ptr = mlx_xpm_file_to_image(vu->mlx, \
@@ -49,12 +49,14 @@ static void	init_texture(t_view *vu, t_map *map)
 	define_texture(vu, map->so, DIR_S);
 	define_texture(vu, DOOR_XPM, DOOR);
 	define_texture(vu, SPRITE_XPM1, SPRITE1);
+	define_texture(vu, SPRITE_XPM2, SPRITE2);
 }
 
 void	init_vu(t_view *vu, t_map *map)
 {
 	vu->p_x = map->p_y + 0.5;
 	vu->p_y = map->p_x + 0.5;
+	vu->fovh_2 = ft_deg2rad(FOV) / 2.0;
 	get_player_position(vu, map);
 	vu->mlx = mlx_init();
 	if (!vu->mlx)
@@ -69,7 +71,5 @@ void	init_vu(t_view *vu, t_map *map)
 		&vu->line_len, &vu->endian);
 	if (!vu->addr || vu->bpp != 32 || vu->endian != 0)
 		ft_error_exit(MLX_ERROR);
-	vu->fov_h = ft_deg2rad(FOV);
 	init_texture(vu, map);
-	init_sprite(vu, map);
 }

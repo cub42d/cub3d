@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/09 21:14:24 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/10 01:05:09 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRCS				+=	$(addsuffix .c, init_minimap draw_minimap draw_player)
 SRCS				+=	$(addsuffix .c, door_event)
 
 #	sprite srcs
-SRCS				+=	$(addsuffix .c, init_sprite)
+SRCS				+=	$(addsuffix .c, draw_sprite)
 
 #	utils srcs
 SRCS				+=	$(addsuffix .c, ft_calloc ft_close ft_error_exit \

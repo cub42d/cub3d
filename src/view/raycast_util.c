@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 01:50:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 21:55:23 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 01:04:39 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	map_get_cell(t_map *map, int x, int y)
 {
 	if (x >= 0 && x < map->height && y >= 0 && y < map->width)
 	{
-		if ((map->arr[x][y] >= '0' && map->arr[x][y] <= '2') || map->arr[x][y] == '4')
+		if ((map->arr[x][y] >= '0' && map->arr[x][y] <= '2') \
+		|| map->arr[x][y] == '4')
 			return ((map->arr[x][y] - '0'));
 		else
 			return (0);
