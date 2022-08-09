@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 06:51:05 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 22:01:37 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 02:55:51 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ static void	set_color(t_data *data, int row, int col)
 {
 	if (data->map->arr[row][col] == '1')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-		((int)(PIXEL_SIZE) *row), 0x345433);
+		((int)(PIXEL_SIZE) *row), 0x010326);
 	else if (data->map->arr[row][col] == '0')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
 		((int)(PIXEL_SIZE) *row), 0xffffff);
 	else if (data->map->arr[row][col] == '2')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-		((int)(PIXEL_SIZE) *row), 0x934233);
+		((int)(PIXEL_SIZE) *row), 0x2F2B8C);
 	else if (data->map->arr[row][col] == '3')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-		((int)(PIXEL_SIZE) *row), 0x934233);
+		((int)(PIXEL_SIZE) *row), 0x3C3A8C);
 	else if (data->map->arr[row][col] == '4')
 		fill_squares(data, ((int)(PIXEL_SIZE) *col), \
-		((int)(PIXEL_SIZE) *row), 0x534533);
+		((int)(PIXEL_SIZE) *row), 0x8C2323);
 }
 
 void	render_map(t_data *data)
@@ -68,6 +68,7 @@ void	render_map(t_data *data)
 				set_color(data, row, col);
 		}
 	}
+	draw_player(data);
 	mlx_put_image_to_window(data->vu->mlx, data->vu->mlx_win, \
 	data->minimap->img, 0, 0);
 }

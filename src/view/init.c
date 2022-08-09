@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:28:29 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/10 00:56:22 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 03:41:24 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ static void	init_texture(t_view *vu, t_map *map)
 	define_texture(vu, DOOR_XPM, DOOR);
 	define_texture(vu, SPRITE_XPM1, SPRITE1);
 	define_texture(vu, SPRITE_XPM2, SPRITE2);
+	define_texture(vu, SPRITE_XPM3, SPRITE3);
+	define_texture(vu, SPRITE_XPM4, SPRITE4);
+	define_texture(vu, SPRITE_XPM5, SPRITE5);
+	define_texture(vu, SPRITE_XPM6, SPRITE6);
+	define_texture(vu, SPRITE_XPM7, SPRITE7);
+	define_texture(vu, SPRITE_XPM8, SPRITE8);
+	define_texture(vu, SPRITE_XPM9, SPRITE9);
+	define_texture(vu, SPRITE_XPM10, SPRITE10);
 }
 
 void	init_vu(t_view *vu, t_map *map)
@@ -72,4 +80,6 @@ void	init_vu(t_view *vu, t_map *map)
 	if (!vu->addr || vu->bpp != 32 || vu->endian != 0)
 		ft_error_exit(MLX_ERROR);
 	init_texture(vu, map);
+	if (map->sprite_cnt > 0)
+		vu->sprite = ft_calloc(sizeof(t_sprite) * map->sprite_cnt);
 }

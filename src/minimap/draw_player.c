@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 07:08:27 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/05 10:43:48 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 02:54:53 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 #include "macro.h"
 #include "mlx.h"
 
+static void	set_player_color(t_data *data, double x, double y, int line)
+{
+	data->minimap->addr[(int)(x + y)] = 0x00030D;
+	data->minimap->addr[(int)(x + y + 1)] = 0x00030D;
+	data->minimap->addr[(int)(x + y - 1)] = 0x00030D;
+	data->minimap->addr[(int)(x + y + 2)] = 0x00030D;
+	data->minimap->addr[(int)(x + y - 2)] = 0x00030D;
+	data->minimap->addr[(int)((x - ((line / 4))) + y)] = 0x00030D;
+	data->minimap->addr[(int)((x - ((line / 4))) + y + 1)] = 0x00030D;
+	data->minimap->addr[(int)((x - ((line / 4))) + y - 1)] = 0x00030D;
+	data->minimap->addr[(int)((x + ((line / 4))) + y)] = 0x00030D;
+	data->minimap->addr[(int)((x + ((line / 4))) + y + 1)] = 0x00030D;
+	data->minimap->addr[(int)((x + ((line / 4))) + y - 1)] = 0x00030D;
+	data->minimap->addr[(int)((x - ((line / 2))) + y)] = 0x00030D;
+	data->minimap->addr[(int)((x + ((line / 2))) + y)] = 0x00030D;
+}
+
 void	draw_player(t_data *data)
 {
 	double	i;
 	double	j;
-	double	x;
-	double	y;
 
 	i = -0.5;
 	while (++i < data->map->height * PIXEL_SIZE)
@@ -30,11 +45,9 @@ void	draw_player(t_data *data)
 			if (j >= data->vu->p_y - 0.5 && j <= data->vu->p_y + 0.5 && \
 			i >= data->vu->p_x - 0.5 && i <= data->vu->p_x + 0.5)
 			{
-				x = i * PIXEL_SIZE * (data->minimap->line_len / 4);
-				y = j * PIXEL_SIZE;
-				data->minimap->addr[(int)(x - 1 + y)] = 0x000000;
-				data->minimap->addr[(int)(x + 1 + y)] = 0x000000;
-				data->minimap->addr[(int)(x + y)] = 0x324325;
+				set_player_color(data, i * PIXEL_SIZE * \
+				(data->minimap->line_len / 4), \
+				j * PIXEL_SIZE, data->minimap->line_len);
 			}
 		}
 	}

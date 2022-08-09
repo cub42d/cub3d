@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:13:19 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/10 00:56:28 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 02:31:45 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ struct s_sprite_utils
 
 struct s_view
 {
-	t_tex			tex_wall[7];
+	t_tex			tex_wall[15];
 	t_sprite		*sprite;
 	t_sprite_utils	utils;
 	t_wall			wl;
@@ -133,7 +133,8 @@ struct s_view
 	double			theta;
 	double			fovh_2;
 	int				is_door;
-	double			loop;
+	int				loop;
+	int				flag;
 	double			zbuf[SX];
 };
 

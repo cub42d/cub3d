@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/13 11:11:22 by hmoon             #+#    #+#              #
-#    Updated: 2022/08/10 01:05:09 by hmoon            ###   ########.fr        #
+#    Updated: 2022/08/10 03:36:11 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ OBJS_DIR			:=	./objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
 .PHONY				:	all
-all					:	$(LIBMLX) $(NAME)
+all					:	mlx $(NAME)
 
 $(NAME)				:	$(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(LIBMLX) $(OBJS) -o $@
@@ -74,7 +74,8 @@ $(OBJS_DIR)			:
 $(OBJS_DIR)%.o		:	%.c
 	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
 
-$(LIBMLX)			:
+.PHONY				:	mlx
+mlx					:
 	make -C $(LIBMLX_DIR) all
 	@cp $(LIBMLX_DIR)/$(LIBMLX) ./
 

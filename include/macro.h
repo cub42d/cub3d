@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 04:25:04 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 22:58:14 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 01:35:22 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,18 @@
 # define MINI_SCALE			0.5
 # define TILE_SIZE			20
 # define PIXEL_SIZE			10
+
 # define DOOR_XPM			"./texture/door.xpm"
-# define SPRITE_XPM1		"./texture/sprite1.xpm"
-# define SPRITE_XPM2		"./texture/sprite2.xpm"
+# define SPRITE_XPM1		"./texture/sprite/sprite1.xpm"
+# define SPRITE_XPM2		"./texture/sprite/sprite2.xpm"
+# define SPRITE_XPM3		"./texture/sprite/sprite3.xpm"
+# define SPRITE_XPM4		"./texture/sprite/sprite4.xpm"
+# define SPRITE_XPM5		"./texture/sprite/sprite5.xpm"
+# define SPRITE_XPM6		"./texture/sprite/sprite6.xpm"
+# define SPRITE_XPM7		"./texture/sprite/sprite7.xpm"
+# define SPRITE_XPM8		"./texture/sprite/sprite8.xpm"
+# define SPRITE_XPM9		"./texture/sprite/sprite9.xpm"
+# define SPRITE_XPM10		"./texture/sprite/sprite10.xpm"
 
 typedef enum e_dir			t_dir;
 
@@ -74,7 +83,15 @@ enum e_dir
 	DIR_S,
 	DOOR,
 	SPRITE1,
-	SPRITE2
+	SPRITE2,
+	SPRITE3,
+	SPRITE4,
+	SPRITE5,
+	SPRITE6,
+	SPRITE7,
+	SPRITE8,
+	SPRITE9,
+	SPRITE10
 };
 
 enum e_hit

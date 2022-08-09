@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 03:11:20 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/09 23:37:29 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 03:32:37 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 
 static int	main_loop(t_data *data)
 {
+	if (data->vu->flag == 1)
+	{
+		data->vu->loop -= 1;
+		if (data->vu->loop == 0)
+			data->vu->flag = 0;
+	}
+	else
+	{
+		if (data->vu->loop == 50)
+			data->vu->loop = 0;
+		data->vu->loop += 1;
+	}
 	render(data);
 	mlx_hook(data->vu->mlx_win, 2, 0, key_down_event, data);
 	mlx_hook(data->vu->mlx_win, 6, 0, mouse_move_event, data);
@@ -34,6 +46,12 @@ int	clear_all(t_data *data)
 	mlx_destroy_image(data->vu->mlx, data->vu->img);
 	mlx_destroy_image(data->vu->mlx, data->minimap->img);
 	mlx_destroy_window(data->vu->mlx, data->vu->mlx_win);
+	ft_double_free(&data->map->arr);
+	ft_free((void **)&data->vu->sprite);
+	ft_free((void **)&data->minimap);
+	ft_free((void **)&data->map);
+	ft_free((void **)&data->vu);
+	ft_free((void **)&data);
 	ft_exit("EXIT");
 	return (0);
 }
