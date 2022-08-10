@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 07:08:27 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/10 02:54:53 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 20:19:38 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@
 
 static void	set_player_color(t_data *data, double x, double y, int line)
 {
-	data->minimap->addr[(int)(x + y)] = 0x00030D;
-	data->minimap->addr[(int)(x + y + 1)] = 0x00030D;
-	data->minimap->addr[(int)(x + y - 1)] = 0x00030D;
-	data->minimap->addr[(int)(x + y + 2)] = 0x00030D;
-	data->minimap->addr[(int)(x + y - 2)] = 0x00030D;
-	data->minimap->addr[(int)((x - ((line / 4))) + y)] = 0x00030D;
-	data->minimap->addr[(int)((x - ((line / 4))) + y + 1)] = 0x00030D;
-	data->minimap->addr[(int)((x - ((line / 4))) + y - 1)] = 0x00030D;
-	data->minimap->addr[(int)((x + ((line / 4))) + y)] = 0x00030D;
-	data->minimap->addr[(int)((x + ((line / 4))) + y + 1)] = 0x00030D;
-	data->minimap->addr[(int)((x + ((line / 4))) + y - 1)] = 0x00030D;
-	data->minimap->addr[(int)((x - ((line / 2))) + y)] = 0x00030D;
-	data->minimap->addr[(int)((x + ((line / 2))) + y)] = 0x00030D;
+	if (y < SX / 2 && x / (SX / 2) < SY / 2)
+	{
+		data->minimap->addr[(int)(x + y)] = 0x00030D;
+		data->minimap->addr[(int)(x + y + 1)] = 0x00030D;
+		data->minimap->addr[(int)(x + y - 1)] = 0x00030D;
+		data->minimap->addr[(int)(x + y + 2)] = 0x00030D;
+		data->minimap->addr[(int)(x + y - 2)] = 0x00030D;
+		data->minimap->addr[(int)((x - ((line / 4))) + y)] = 0x00030D;
+		data->minimap->addr[(int)((x - ((line / 4))) + y + 1)] = 0x00030D;
+		data->minimap->addr[(int)((x - ((line / 4))) + y - 1)] = 0x00030D;
+		data->minimap->addr[(int)((x + ((line / 4))) + y)] = 0x00030D;
+		data->minimap->addr[(int)((x + ((line / 4))) + y + 1)] = 0x00030D;
+		data->minimap->addr[(int)((x + ((line / 4))) + y - 1)] = 0x00030D;
+		data->minimap->addr[(int)((x - ((line / 2))) + y)] = 0x00030D;
+		data->minimap->addr[(int)((x + ((line / 2))) + y)] = 0x00030D;
+	}
 }
 
 void	draw_player(t_data *data)
