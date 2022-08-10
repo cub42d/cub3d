@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 19:29:10 by hmoon             #+#    #+#             */
-/*   Updated: 2022/08/10 03:04:48 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 19:38:06 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	get_visible_sprite(t_view *vu, t_map *map)
 	int	x;
 	int	y;
 
-	i = 0;
+	i = -1;
 	x = -1;
 	while (++x < map->height)
 	{
@@ -113,7 +113,7 @@ static void	get_visible_sprite(t_view *vu, t_map *map)
 		{
 			if (map->arr[x][y] == '4')
 			{
-				vu->sprite[i].x = x;
+				vu->sprite[++i].x = x;
 				vu->sprite[i].y = y;
 				vu->sprite[i].theta = atan2((y + 0.5) - vu->p_y, \
 				(x + 0.5) - vu->p_x);
@@ -121,7 +121,6 @@ static void	get_visible_sprite(t_view *vu, t_map *map)
 					vu->sprite[i].theta += _2PI;
 				vu->sprite[i].dist = ft_l2dist(vu->p_x, vu->p_y, \
 				x + 0.5, y + 0.5) * cos(vu->theta - vu->sprite[i].theta);
-				i++;
 			}
 		}
 	}
@@ -133,7 +132,7 @@ void	draw_sprite(t_view *vu, t_map *map)
 	{
 		get_visible_sprite(vu, map);
 		_qsort(vu->sprite, 0, map->sprite_cnt);
-		vu->utils.i = map->sprite_cnt + 1;
+		vu->utils.i = map->sprite_cnt;
 		while (--vu->utils.i >= 0)
 		{
 			vu->utils.sh = get_wall_height(vu->sprite[vu->utils.i].dist);
